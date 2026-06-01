@@ -1,0 +1,78 @@
+@if (mostrarFormulario) {
+  <div class="overlay"></div>
+}
+
+<div class="primercv-panel" >
+      <h2>Datos para mi primer CV</h2>
+    
+    <div class="form-row">
+      <input type="text" [(ngModel)]="cv.apellido_paterno" placeholder="Apellido paterno *" required>
+      <input type="text" [(ngModel)]="cv.apellido_materno" placeholder="Apellido materno" required>
+    </div>
+
+      <div class="form-single">
+        <input type="text" [(ngModel)]="cv.nombres" placeholder="Nombres *" required>
+      </div>
+
+      <div class="form-row">
+        <input type="email" [(ngModel)]="cv.email" placeholder="Email *" required>
+        <input type="text" [(ngModel)]="cv.celular" placeholder="Celular *" required 
+              pattern="[0-9]*" inputmode="numeric" oninvalid="this.setCustomValidity('Por favor, ingrese solo números.')"
+              (keypress)="validarEntradaNumerica($event)">
+      </div>
+<!--
+      <div class="form-row compact">
+        <div class="input-container">
+          <label for="fecha_nacimiento" class="placeholder">Fecha de nacimiento *</label>
+          <input type="date" id="fecha_nacimiento" [(ngModel)]="cv.fecha_nacimiento" required>
+        </div>
+
+        <input type="text" [(ngModel)]="cv.profesion" placeholder="Profesión u oficio *" required>
+      </div>
+    -->
+<div class="row g-2 align-items-center">
+<div class="col-auto">
+  <div class="form-floating">
+    <input 
+      type="date" 
+      id="fecha_nacimiento" 
+      class="form-control form-control-sm pt-3" 
+      style="font-size: 0.7rem;"
+      [(ngModel)]="cv.fecha_nacimiento"
+      placeholder="Fecha de nacimiento">
+    <label for="fecha_nacimiento" class="small text-muted lh-1" style="font-size: 0.7rem;">Fecha de nacimiento</label>
+  </div>
+</div>
+
+  <div class="col">
+<input type="text" [(ngModel)]="cv.profesion" class="small text-muted lh-1" style="font-size: 0.6rem;" placeholder="Profesión u oficio *" required>
+  </div>
+</div>
+
+      <div class="form-single">
+        <textarea [(ngModel)]="cv.objetivo" placeholder="Objetivo laboral *" required></textarea>
+      </div>
+      <div class="form-single">
+        <textarea [(ngModel)]="cv.experiencia" placeholder="Experiencia laboral"></textarea>
+      </div>
+      <div class="form-single">
+        <textarea [(ngModel)]="cv.cursos" placeholder="Estudios o cursos"></textarea>
+      </div>
+      <div class="form-single">
+        <textarea [(ngModel)]="cv.habilidades" placeholder="Habilidades o cosas que se te dan bien *" required></textarea>
+      </div>
+    <!--</div>-->
+
+    <p class="leyenda">(*) Campos obligatorios</p>
+
+    <div class="form-actions">
+      <button (click)="guardarCV()">Guardar CV</button>
+      <button class="cancelar" (click)="closePrimerCV()">Cancelar</button>
+    </div>
+    <div class="errores" *ngIf="errores.length > 0">
+    <p>⚠️ Se encontraron errores en el formulario:</p>
+      <ul>
+        <li *ngFor="let error of errores">{{ error }}</li>
+      </ul>
+    </div>
+</div>

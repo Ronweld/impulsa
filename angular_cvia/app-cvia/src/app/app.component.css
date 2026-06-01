@@ -1,0 +1,202 @@
+body {
+  margin: 0;
+  padding: 0;
+}
+
+.contenedor {
+  display: flex;
+  flex-direction: column;
+  height: 100vh;
+  z-index: 2;
+  overflow: hidden; /* Evita el scroll general del contenedor */
+}
+
+.header {
+  grid-area: header;
+  background-color: #333;
+  color: white;
+  padding: 10px 20px;
+}
+
+/* Estilos para los botones de alternar paneles en móvil */
+.panel-toggle-buttons button {
+  background-color: #40906c;
+  color: white;
+  border: none;
+  padding: 8px 12px;
+  margin-left: 10px;
+  cursor: pointer;
+  border-radius: 4px;
+  transition: background-color 0.3s ease;
+}
+
+.panel-toggle-buttons button:hover {
+  /*background-color: #777;*/
+  background-color: #017d47;
+}
+
+.panel-toggle-buttons button.active {
+  /*background-color: #007bff;*/ /* Color para el botón activo */
+  background-color: #02c26f;
+}
+
+/* Contenedor de paneles (left-panel-container) */
+.left-panel-container {
+  background-color: #f4fffc;
+  display: flex;
+  overflow: hidden; /* Controla el overflow general para los paneles */
+  height: calc(100vh - 50px); /* ajustar si tienes header fijo */
+  padding: 0.5% 0.5%;
+}
+
+/* --- Estilos para pantallas grandes (Desktop: min-width: 769px) --- */
+@media (min-width: 769px) {
+  .left-panel-container {
+    flex-direction: row; /* Paneles uno al lado del otro */
+    justify-content: center; /* Centra el contenido si hay espacio extra */
+    overflow: auto; /* Permite scroll si el contenido general de los paneles lo necesita */
+  }
+
+  .left-panel-container .left-panel {
+    /*flex-grow: 1;*/
+    min-width: 15%;
+    width: 25%; /* Ancho preferido en desktop */
+    background: rgb(246, 245, 245);
+    overflow: hidden; /* Permite scroll si el contenido del panel lo necesita */
+    z-index: 20;
+    border-radius: 25px;
+    margin-left: 0.5%;
+    margin-right: 0.5%;
+    /*border: #12017d;
+    border-style: dotted;*/
+  }
+
+  .left-panel-container .right-panel {
+    min-width: 15%;
+    width: 95%; /* Ancho preferido en desktop */
+    background-color: #ddd;
+    overflow: hidden; /* Mantén el overflow para el contenido interno del right-panel */
+    border-radius: 25px;
+    z-index: 20;
+    margin-right: 1%;
+    /*border: #ed078d;
+    border-style:groove;*/
+  }
+
+}
+
+/* --- Estilos para pantallas pequeñas (Móvil: max-width: 768px) --- */
+@media (max-width: 768px) {
+  .left-panel-container {
+    flex-direction: column; /* Apila los paneles */
+    height: 100%; /* Ocupa toda la altura disponible en el contenedor */
+    overflow: hidden; /* Mantén overflow hidden aquí para evitar barras de scroll dobles */
+  }
+
+  /* Modificamos el .header para que sus *hijos directos* se apilen en móvil */
+  .header {
+    flex-direction: column; /* Apila los elementos del header (app-header y botones) */
+    align-items: center; /* Centra los elementos apilados horizontalmente */
+    /* Puedes ajustar a 'flex-start' si prefieres que se alineen a la izquierda */
+  }
+
+  /* Aseguramos que app-header ocupe todo el ancho disponible para sus menús */
+  .header app-header {
+      width: 100%; /* Permite que app-header use todo el ancho para sus menús */
+      /* Asegúrate de que los menús internos de app-header sean responsive por sí mismos */
+  }
+
+  .panel-toggle-buttons {
+    width: 100%; /* Los botones ocupan todo el ancho */
+    display: flex;
+    justify-content: center; /* Centra los botones dentro de su contenedor */
+    margin-top: 10px;
+    margin-bottom: 5px;
+  }
+
+  .left-panel-container .left-panel,
+  .left-panel-container .right-panel {
+    /*width: 100%;*/ /* Ambos paneles ocupan todo el ancho */
+    /*height: 100%;*/ /* Permite que ocupen el espacio restante en altura */
+    overflow: auto; /* Asegura que el contenido interno tenga scroll */
+    flex-shrink: 0;
+  }
+
+  .right-panel {
+    height: 100%;
+    padding: 6px;
+    width: 100%;
+    box-shadow: none;
+  }
+}
+
+
+.left-panel-container .right-panel-wrapper {
+  display: flex;
+  flex-direction: row;
+  width: 100%;
+  position: relative;
+  overflow-x: hidden; 
+  margin-left: 0.5%;
+  margin-right: 0.5%;
+}
+
+.left-panel-container .right-panel-wrapper.has-sub-panel .right-panel {
+  width: calc(100% - 15%); /* Reservamos espacio para el subpanel */
+}
+
+.right-sub-panel {  
+  display: flex;
+  flex-direction: column;
+  position: relative;
+  top: 0px;
+  right: 0px;
+  z-index: 20;
+  background-color: #ddd;
+  border: none;
+  /*padding: 0px 1px;*/
+  border-radius: 25px;
+  /*margin-right: 5.5%;*/
+  margin-left: 0.5%;
+  cursor: pointer;
+  /*height: 90%;*/
+
+  width: 5%;
+  /*background-color: #f2f2f2;*/
+  border-left: 1px solid #ccc;
+  /*padding: 5px;*/
+  overflow-y: auto;
+  overflow-x: hidden;
+  /*border: chartreuse;
+  border-style: ridge;*/
+}
+
+.left-panel-container .right-panel-wrapper.has-sub-panel .right-sub-panel {
+  width: 300px; /* Reservamos espacio para el subpanel */
+  /*margin-right: 5.5%;*/
+  transition: 0.6s ease;
+}
+
+.sub-panel-header {
+  padding: 15px;
+  border-bottom: 1px solid #ddd;
+}
+
+.sub-panel-content {
+  padding: 15px;
+  flex-grow: 1;
+  overflow-y: auto;
+}
+
+.toggle-subpanel-button {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  z-index: 100;
+  background-color: #e0e0e0;
+  border: none;
+  padding: 6px 10px;
+  border-radius: 4px;
+  cursor: pointer;
+}
+

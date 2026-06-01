@@ -1,0 +1,575 @@
+.overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    background: rgba(0, 0, 0, 0.5); /* Fondo oscuro */
+    z-index: 80; /* Debajo del formulario */
+    pointer-events: all; /* 🔥 Bloquea interacción con todo detrás */
+}
+
+.right-panel {
+  display: flex;
+  flex-direction: column;
+  position: relative; /* 🔥 Mantiene los controles en una posición fija */
+  right: 0px;
+  top: 0px;
+  width: 95%; /* 🔥 Ajusta el tamaño del panel */
+  height: 90vh; /* 🔥 Que ocupe toda la altura */
+  background-color: #ddd;
+  padding: 0% 4.7%;
+  /*box-shadow: -2px 0px 5px rgba(0, 0, 0, 0.2);*/
+  z-index: 90; /* 🔥 Asegura que esté por encima de los elementos */
+  border-radius: 25px;
+  /*border:#930209;
+  border-style: double;*/
+}
+
+@media (max-width: 600px) {
+  .right-panel {
+    height: 60vh; /* más bajo en móviles para dejar espacio al input */
+    padding: 6px;
+  }
+}
+
+
+.visible {
+  position: absolute; /* 🔥 Se coloca sobre el panel derecho */
+  width: 100%;
+  height: 25%;
+  background: rgba(255, 255, 255, 0.9); /* 🔥 Fondo semitransparente */
+  z-index: 2010; /* 🔥 Asegura que esté por encima de los elementos */
+  box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.3); /* 🔥 Agrega sombra */
+}
+
+.preview-container {
+  margin-top: 0px;
+  margin-left: 0px;
+  height: 90vh;
+  width: 100%;
+  z-index: 3020; /* 🔥 Asegura que esté por encima de los elementos */
+  overflow: hidden;
+}
+
+embed {
+  height: 90vh; /* 🔥 Usa todo el alto disponible */
+  width: 100%;
+}
+
+.preview-container .preview-header {
+  display: flex;
+  justify-content: flex-end;
+  gap: 25px; /* Espaciado entre botones */
+}
+
+.preview-container .preview-header button {
+  cursor: pointer;
+  background: #3d3d3d;
+  border: 0px solid #3d3d3d;
+  padding: 1px;
+  font-size: 16px;
+  width: 20px; /* 🔥 Ancho fijo */
+  height: 20px; /* 🔥 Alto fijo */
+  text-align: center;
+  margin-top: 2px;
+  margin-right: 4px;
+  gap: 5px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.preview-container .preview-header button:hover {
+  background: #5f5f5f;
+}
+
+.hidden {
+  display: none;
+  visibility: hidden;
+}
+
+.preview-container .preview-header .close-btn {
+  position: absolute;
+  background: #3d3d3d;
+  color: white;
+  padding: 5px 8px;
+  font-size: 16px;
+  cursor: pointer;
+  border-radius: 50%;
+}
+
+.right-panel .chat-container {
+  flex-direction: column;
+  height: 73vh; /* 🔥 Pantalla completa */
+  width: 100%;
+  border-radius: 25px;
+  /*border: #7dd580;
+  border-style: groove;*/
+}
+
+.chat-container .historial {
+  /*flex-grow: 1;*/ /* 🔥 Expande el historial arriba del input */
+  overflow-y: auto; /* 🔥 Permite desplazamiento */
+  padding: 10px;
+  height: 70vh;
+  scroll-behavior: smooth; /* 🔥 Hace que el scroll sea suave */
+}
+
+@media (max-width: 600px) {
+  .historial {
+    height: 40vh; /* más bajo en móviles para dejar espacio al input */
+    padding: 6px;
+    width: 28%;
+  }
+}
+
+.solicitud {
+  background-color: #d4edda; /* 🔥 Verde claro */
+  border-radius: 10px;
+  max-width: 80%;
+  margin-left: auto;
+  margin-top: 0.5rem;
+  margin-bottom: 0.5rem;
+}
+
+@media (max-width: 600px) {
+  .solicitud {
+    margin-left: 5% !important;
+    font-size: 0.95rem;
+  }
+}
+
+.respuesta {
+  background-color: #7dd580;
+  border-radius: 10px;
+  max-width: 90%; /* Reducir un poco para evitar tocar los bordes */
+}
+
+@media (max-width: 600px) {
+  .respuesta {
+    max-width: 85%;
+  }
+}
+
+.respuesta .markdown-container {
+  padding: 0.0625rem 1.5rem;
+  border-radius: 10px;
+  max-width: 95%;
+  margin: auto;
+  background: #a4f1a7;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+}
+
+@media (max-width: 600px) {
+  .respuesta .markdown-container {
+    padding: 0.5rem 1rem;
+    font-size: 0.95rem;
+  }
+}
+
+.respuesta p {
+  margin-top: 0px;
+}
+
+.area-input{
+  height: 15vh;
+}
+
+.area-input .input-container {
+  position: absolute; /* 🔥 Mantiene el área fija en pantalla */
+  bottom: 30px; /* 🔥 Siempre en la parte inferior */
+  left: 10%;
+  width: 70%; 
+  height: 12%; /* 🔥 Permitimos ajuste dinámico */
+  background-color: #f8f8f8; /* 🔥 Fondo claro */
+  padding: 10px;
+  display: flex;
+  gap: 10px;
+  box-shadow: 0px -2px 5px rgba(93, 85, 85, 0.2); /* 🔥 Efecto visual */
+}
+
+.input-container.expanded {
+  position: relative;
+  bottom: 40px;
+  left: 300px;
+  width: 60%;
+  height: 30vh; /* 🔥 Se agranda para mayor visibilidad */
+  background-color: #fff; /* 🔥 Fondo distinto para destacar */
+  box-shadow: 2px 4px 10px rgba(11, 204, 88, 0.3); /* 🔥 Sombra para resaltar */
+    transition: all 0.7s ease-out; /* 🔥 Transición suave */
+}
+
+.input-container.expanded button {
+    position: relative;
+    top: 5px;
+    right: 5px;
+}
+  
+.input-container .textarea-prompt {
+  position: relative;
+  flex: 1; /* 🔥 Expande el textarea */
+  resize: none; /* 🔥 Evita cambios manuales de tamaño */
+  height: auto;
+  border-radius: 5px;
+  padding: 5px;
+  min-height: 50px; /* 🔥 Altura mínima (equivalente a 3 líneas) */
+  max-height: 250px; /* 🔥 Expande hasta 5 veces su tamaño original */
+  overflow-y: auto; /* 🔥 Activa el scroll si el texto supera el límite */
+  white-space: pre-wrap; /* 🔥 Respeta los saltos de línea */
+  transition: all 0.3s ease-in-out; /* 🔥 Transición suave */
+}
+
+.input-container .textarea-prompt.expanded {
+  position: relative;
+  height: auto; /* 🔥 Se agranda para mayor visibilidad */
+  background-color: #fff; /* 🔥 Fondo distinto para destacar */
+  box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.3); /* 🔥 Sombra para resaltar */
+  transition: all 0.3s ease-in-out; /* 🔥 Transición suave */
+}
+  
+.input-container button {
+  height: 50px;
+  border-radius: 5px;
+}
+
+.txt-are-edi-sol{
+  position: relative;
+  flex: 1; /* 🔥 Expande el textarea */
+  resize: none; /* 🔥 Evita cambios manuales de tamaño */
+  height: 30vh;
+  width: 85%; 
+  border-radius: 5px;
+  margin-left: 10px;
+  border-radius: 30px;
+  padding: 5px;
+  min-height: 5vh; /* 🔥 Altura mínima (equivalente a 3 líneas) */
+  max-height: 50vh; /* 🔥 Expande hasta 5 veces su tamaño original */
+  overflow-y: auto; /* 🔥 Activa el scroll si el texto supera el límite */
+  white-space: pre-wrap; /* 🔥 Respeta los saltos de línea */
+  transition: all 0.3s ease-in-out; /* 🔥 Transición suave */
+}
+
+.txt-are-edi-sol.expanded {
+  position: relative;
+  height: auto; /* 🔥 Se agranda para mayor visibilidad */
+  background-color: #fff; /* 🔥 Fondo distinto para destacar */
+  box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.3); /* 🔥 Sombra para resaltar */
+  z-index: 1000; /* 🔥 Se superpone sobre otros elementos */
+  transition: all 0.3s ease-in-out; /* 🔥 Transición suave */
+}
+
+.popup-convocatoria {
+  position: fixed;
+  top: 45%; /* Centrado mejorado */
+  left: 50%;
+  transform: translate(-50%, -50%);
+  background-color: white;
+  padding: 0.5rem;
+  border-radius: 8px;
+  box-shadow: 0px 4px 12px rgba(0, 0, 0, 0.15);
+  height: 70%;
+  width: 50%;
+  z-index: 100;
+  /*color: #bd0404;*/
+  pointer-events: auto; /* Permite interacción solo con el formulario */
+}
+
+@media (max-width: 600px) {
+  .popup-convocatoria {
+    top: 35%;
+    left: 60%;
+    height: 55%;
+    width: 70%;
+  }
+}
+
+.popup-header {
+  display: flex;
+  justify-content: flex-end;
+}
+
+.minimize-btn {
+  background: none;
+  border: none;
+  font-size: 20px;
+  cursor: pointer;
+}
+
+.hidden {
+  display: none;
+}
+
+.popup-convocatoria #convocatoriaInput {
+  flex-grow: 1; /* Ocupa todo el espacio disponible dentro del popup */
+  position: relative;
+  width: 96%;
+  height: 80%;
+  resize: none;
+  border: 1px solid #ccc;
+  padding: 0.8rem;  
+  max-height: 90%; 
+  overflow-y: auto; /* 🔥 Activa el scroll si el texto supera el límite */
+  transition: all 0.3s ease-in-out; /* 🔥 Transición suave */
+}
+
+@media (max-width: 600px) {
+  .popup-convocatoria #convocatoriaInput{
+    height: 80%;
+    width: 95%;
+    padding: 0rem 0.25rem;
+    font-size: 0.7rem;
+  }
+}
+
+
+.popup-convocatoria .form-actions {
+  display: flex;
+  gap: 10px; /* Espacio entre botones */
+  justify-content: center; /* Centra los botones horizontalmente */
+  align-items: center; /* Centra los botones verticalmente */
+}
+
+@media (max-width: 600px) {
+  .popup-convocatoria .form-actions{
+    font-size: 0.6rem;
+  }
+}
+
+.popup-convocatoria .form-actions button {
+    background-color: #02c26f;
+    color: white;
+    padding: 10px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-weight: bold;
+    width: 40%;
+    margin: 5px 0;
+}
+
+@media (max-width: 600px) {
+  .popup-convocatoria .form-actions button{
+    font-size: 0.6rem;
+  }
+}
+
+.popup-convocatoria .form-actions button:hover {
+    background-color: #017d47;
+}
+
+
+.right-panel .chat-container .btnConvocatoria {
+  /*margin-bottom: 20%;*/
+  padding: 0px;
+}
+
+.right-panel .chat-container .btnConvocatoria .btn-3dx {
+  position: absolute;
+  /*display: block;*/
+  width: 25%; /* 🔥 Más ancho para parecer un input */
+  padding: 10px;
+  background: #40906c; 
+  border: 1px solid #028248; /* 🔥 Borde sutil como los inputs */
+  border-radius: 25px;
+  color: rgb(255, 255, 255); /* 🔥 Color de texto más oscuro */
+  text-align: center; /* 🔥 Alineación de texto como en un campo de entrada */
+  font-size: 12px; /* 🔥 Tamaño de fuente parecido a un input */
+  cursor: pointer; /* 🔥 Cambia el cursor para parecer un campo editable */
+  box-shadow: 0 2px #01703e; /* 🔥 Sombra para efecto 3D */
+  bottom: 18%;
+  left: 8.5%;
+  transition: transform 0.2s ease-in-out; /* 🔥 Transición suave */
+}
+
+@media (max-width: 600px) {
+  .btnConvocatoria .btn-3dx {
+    width: 16%;
+    font-size: 0.7rem;
+    padding: 0.2rem;
+  }
+}
+
+.btnConvocatoria .btn-3dx:focus {
+  outline: none;
+  border-color: #029b49; /* 🔥 Resalta el borde como un input seleccionado */
+}
+
+.btnConvocatoria .btn-3dx:hover {
+  transform: scale(1.1); /* 🔥 Efecto de zoom al pasar el cursor */
+}
+
+.leyenda {
+    font-size: 8px; /* 🔹 Reduce el tamaño de letra */
+    color: gray; /* 📌 Color más sutil */
+    text-align: left; /* 🔹 Centra el texto */
+    margin-top: 5px; /* 🔹 Espacio superior */
+}
+
+.table-form {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+.table-hist {
+    width: 100%;
+    border-collapse: collapse;
+    table-layout: fixed;
+    word-wrap: break-word;
+}
+
+@media (max-width: 600px) {
+  .table-hist {
+    font-size: 0.85rem;
+    display: block;
+    overflow-x: auto;
+  }
+}
+
+.table-form t4 {
+    padding: 8px;
+    vertical-align: top;
+}
+
+.table-form td:first-child {
+    width: 15%; /* 🔹 Columna de etiquetas más estrecha */
+}
+
+.table-form td:last-child {
+    width: 85%; /* 📌 Columna de inputs más amplia */
+}
+
+/* ✏️ Botón de edición superior (Ubicado en la esquina superior derecha del mensaje) */
+.solicitud button.btn-editar-superior {
+  position: absolute;
+  top: 1px;
+  right: 5px;
+}
+
+/* 💾 Botón de guardar (Esquina inferior derecha del textarea) */
+.solicitud button.btn-guardar {
+  position: absolute;
+  bottom: 5px;
+  right: 50px;
+}
+
+/* ❌ Botón de cancelar (Esquina inferior derecha del textarea) */
+.solicitud button.btn-cancelar {
+  position: absolute;
+  bottom: 5px;
+  right: 5px;
+}
+
+.solicitud button {
+  font-family: "Arial", sans-serif; /* 🔥 Fuente moderna y clara */
+  font-size: 9px;
+  position: relative; /* Importante para el efecto de desplazamiento */
+  align-items: center;
+  float: right;
+  padding: 0.25rem 0.5rem;
+  border: 2px solid #7dd580; /* Un borde para que se note el efecto */
+  border-radius: 0.5rem;
+  background-color: #40906c; /*#e11f1f;  #ffffff */
+  color: #ffffff; /* #4CAF50; */
+  cursor: pointer;
+  transition: transform 0.1s ease, box-shadow 0.1s ease; /* Transiciones suaves */
+}
+
+.solicitud button:hover {
+  transform: scale(1.1);
+}
+
+/* 🖼️ Íconos dentro de los botones */
+.solicitud button img {
+  width: 24px;
+  height: 24px;
+}
+
+/* ✏️ Botón de edición inferior (Ubicado en la esquina inferior derecha del mensaje) */
+.respuesta .table-hist button.btn-cpy-inf {
+  position: relative;
+  align-items: center ;
+  float: right; /* 🔥 Ubica el botón a la derecha */
+}
+
+.respuesta button {
+  font-family: "Arial", sans-serif; /* 🔥 Fuente moderna y clara */
+  font-size: 9px;
+  position: relative; /* Importante para el efecto de desplazamiento */
+  align-items: center;
+  float: right;
+  padding: 0.25rem 0.5rem;
+  border: 2px solid #7dd580; /* Un borde para que se note el efecto */
+  border-radius: 0.5rem;
+  background-color: #40906c; /*#e11f1f;  #ffffff */
+  color: #ffffff; /* #4CAF50; */
+  cursor: pointer;
+  transition: transform 0.1s ease, box-shadow 0.1s ease; /* Transiciones suaves */
+}
+
+.respuesta button:hover {
+  transform: scale(1.1);
+  background-color: #4CAF50; /* Un ligero cambio de color al pasar el mouse */
+}
+
+.respuesta button:active {
+  /* Efecto de hundimiento: */
+  transform: translateY(2px); /* Desplaza el botón hacia abajo 2 píxeles */
+  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.1); /* Reduce la sombra */
+}
+
+.table-hist tr:first-child {
+  position: relative; /* ✅ Permite que el botón se ajuste al `td` */
+  height: 3vh; /* ✅ Aumenta la altura de la primera fila */
+  border-bottom: 2px solid #ccc; /* ✅ Línea gris en la primera fila */
+}
+
+.table-hist tr:first-child td {
+  position: relative;
+  border: none;
+  vertical-align: middle; /* ✅ Asegura que el contenido esté centrado */
+    display: flex; /* Usa flexbox para alinear elementos */
+    justify-content: right; /* Centra los botones horizontalmente */
+    align-items: center; /* Centra los botones verticalmente */
+    gap: 5px; /* Espacio entre los botones */
+    padding: 0px; /* Espaciado interno */
+}
+
+.solicitud .markdown-container {
+  padding: 10px;
+  border-radius: 10px;
+  max-width: 95%;
+  margin: auto;
+  background: #f1f3f5;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+}
+
+@media (max-width: 600px) {
+  .solicitud .markdown-container {
+    padding: 0.5rem 1rem;
+    font-size: 0.95rem;
+  }
+}
+/*
+@media print {
+  h1, h2, h3 {
+    margin-top: 10em;
+    margin-bottom: 10em;
+  }
+}
+*/
+.errores {
+  color: red;
+  font-size: 14px;
+  background: #ffebe8;
+  padding: 10px;
+  border-radius: 5px;
+  margin-top: 15px;
+}
+.errores ul {
+  padding-left: 20px;
+}
+.errores li {
+  list-style-type: disc;
+}
+

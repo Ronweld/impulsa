@@ -1,0 +1,28 @@
+@if (mostrarFormulario) {
+<div class="overlay"></div>
+}
+
+<div class="oportunidadesfortalezas-panel" >
+      <h2>Cuéntame acerca de ti</h2>
+      <div class="form-single">
+        <textarea id="txtare_oportunidades_fortalezas" [(ngModel)]="cv.actividades" placeholder="Para poder ayudarte a descubrir tu potencial, cuéntame algunas actividades o experiencias que haz desarrollado en los últimos años. *" required></textarea>
+      </div>
+    <div class="form-check">
+      <input type="checkbox" id="checkAdjuntarOF" [(ngModel)]="cv.adjuntarOF" />
+      <label for="checkAdjuntoOF">Considerar resultado de potencial para curriculum vitae</label>
+    </div>
+
+    <p class="leyenda">(*) Campos obligatorios</p>
+
+    <div class="form-actions">
+      <button (click)="generateoportunidadesfortalezas()">Descrubrir mi potencial</button>
+      <button class = "cancelarof" (click)="closeOportunidadesFortalezas()">Cancelar</button>
+    </div>
+
+    <div class="errores" *ngIf="errores.length > 0">
+    <p>⚠️ Se encontraron errores en el formulario:</p>
+      <ul>
+        <li *ngFor="let error of errores">{{ error }}</li>
+      </ul>
+    </div>
+</div>

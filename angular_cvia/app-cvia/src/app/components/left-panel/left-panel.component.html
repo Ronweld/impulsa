@@ -1,0 +1,67 @@
+<link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+
+<div class="left-panel">
+  <table class="tabla-menu-mi-pri-cv">
+    <tr>
+          <td class="right"><a (click)="showPrimerCV()">Mi primer CV</a></td>
+      </tr>
+      <tr>
+          <td class="left"><label><h5>Mis archivos</h5></label></td>
+      </tr>
+  </table>
+
+  <label class="custom-file-upload">
+      Seleccionar archivos
+      <input type="file" (change)="addFile($event)" multiple>
+  </label>
+
+  <h6><span class="h6-span">Aquí revisas y gestionas los archivos que enviastes</span></h6>
+  <div class="overflow-auto" style="max-height: 40%;">
+  @for (file of fileList; track file.name) {
+    <table class="tabla-menu-file" (dblclick)="previewSelectedFile(file)" >
+      <tr class="fila-nombre-file">
+            <td class="tres-puntos">
+            <button class="menu-button" (click)="toggleMenu(file, $event)" >
+              <i class="fa fa-ellipsis-v"></i>
+            </button>
+            </td>
+            <td class="nombre-file">
+              @if (file.disabled) {
+                <span class="span-disabled" title="{{ titulo }}">{{ file.name }} ({{ file.size }} bytes)</span>
+              } @else {
+                <span class="span-file-name" title="{{titulo}}">{{ file.name }} ({{ file.size }} bytes)</span>
+              }
+            <!--</td>
+        </tr>
+    </table> -->
+
+          <div class="file-options" [class.show]="isMenuOpen(file)" (click)="$event.stopPropagation()">
+            <button (click)="deleteFile($index)">
+              <i class="fa fa-trash"></i> Eliminar
+            </button>
+            <button (click)="toggleDisable($index)">
+              <i class="fa fa-ban"></i> Activar/Desactivar
+            </button>
+          </div>
+            </td>
+        </tr>
+    </table>
+  }
+</div>
+  <!-- Botones añadidos en la parte inferior -->
+  <div class="bottom-buttons">
+    <ul>
+      <li><h5>Acciones</h5></li>
+    <li>
+    <button (click)="generateSummary()">Genera resumen ejecutivo...</button></li>
+    <li>
+    <button (click)="generarCV_Defecto()">Genera CV...</button></li>
+    <li>
+    <button (click)="pruebaPrompts()">Prueba estos servicios</button></li>
+    <li>
+    <button (click)="fortalezasOportunidades()">Conoce tus fortalezas y habilidades</button></li>
+    <li>
+    <button (click)="cartaPresentacion()">Genera carta de presentación</button></li>
+    </ul>
+  </div>
+</div>

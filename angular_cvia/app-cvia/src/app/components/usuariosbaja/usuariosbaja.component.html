@@ -1,0 +1,68 @@
+
+@if (mostrarFormulario) {
+  <div class="overlay"></div>
+}
+
+<div class="usuario-form">
+  <h2>Dar de baja usuarios</h2>
+  <div class="form-single">
+    <input type="text" [(ngModel)]="usuarioData.nombre_usuario" placeholder="Nombre de usuario *" [readonly]="true">
+  </div>
+
+  <div class="form-row">
+    <input type="text" [(ngModel)]="usuarioData.apellido_paterno" placeholder="Apellido Paterno *" [readonly]="true">
+    <input type="text" [(ngModel)]="usuarioData.apellido_materno" placeholder="Apellido Materno" [readonly]="true">
+  </div>
+
+  <div class="form-single">
+    <input type="text" [(ngModel)]="usuarioData.nombres" placeholder="Nombres *" [readonly]="true">
+  </div>
+
+  <div class="form-row">
+    <input type="email" [(ngModel)]="usuarioData.email1" placeholder="Correo Electrónico 1*" [readonly]="true">
+    <input type="email" [(ngModel)]="usuarioData.email2" placeholder="Correo Electrónico 2" [readonly]="true">
+  </div>
+
+  <div class="form-single">
+    <input type="text" [(ngModel)]="usuarioData.celular" placeholder="Número de Celular *" [readonly]="true">
+  </div>
+
+  <div class="form-single">
+    <input type="text" [(ngModel)]="usuarioData.direccion" placeholder="Dirección *" [readonly]="true">
+  </div>
+
+  <div class="form-row">
+    <select [(ngModel)]="usuarioData.tipo_documento_identidad" >
+      <option value="" disabled selected>Tipo Documento *</option>
+      <option value="01">DNI</option>
+      <option value="02">Pasaporte</option>
+      <option value="03">Carnet de Extranjería</option>
+      <option value="04">Registro Único de Contribuyentes (RUC)</option>
+    </select>
+    <input type="text" [(ngModel)]="usuarioData.numero_documento_identidad" placeholder="Número Documento *" [readonly]="true">
+  </div>
+
+  <div class="form-group-captcha-container">
+    <label class="img-captchaImageUrl">
+      <img  [src]="captchaImageUrl" alt="CAPTCHA" >
+    </label>
+    <button class="refresh-button" (click)="generateCaptcha()" title="Generar CAPTCHA">
+      &#x21BB;
+    </button>
+    <input class="input-captchaInput" id="captcha" type="text" [formControl]="captchaInput" maxlength="6" placeholder="Ej: ABC123" (keyup.enter)="validateCaptcha()" />
+  </div>
+    
+  <!-- Mostrar solo el botón correcto -->
+  <div class="form-actions">
+    <button (click)="darDeBajaUsuario()">Dar baja</button>
+    <button  class="cancelar" (click)="closeUsuario()">Cancelar</button>
+  </div>
+
+  <div class="errores" *ngIf="errores.length > 0">
+    <p>⚠️ Errores encontrados:</p>
+    <ul>
+      <li *ngFor="let error of errores">{{ error }}</li>
+    </ul>
+  </div>
+
+</div>

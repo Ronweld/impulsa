@@ -1,0 +1,13 @@
+opciones_carta:
+  - codigo: "PRIMER_EMPLEO"
+    valor: "Primer empleo (sin experiencia)"
+  - codigo: "CON_OFERTA"
+    valor: "Solicitada por oferta"
+  - codigo: "SIN_OFERTA"
+    valor: "Espontánea (autocandidatura)"
+
+idioma_respuesta:
+  - codigo: "Español"
+    valor: "Español"
+  - codigo: "Inglés"
+    valor: "Inglés"

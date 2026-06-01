@@ -1,0 +1,35 @@
+@if (mostrarFormulario) {
+  <div class="overlay"></div>
+}
+<div class="popup-ayuda-prompt">
+
+  <div class="barra-arrastre" >
+      <h2>Centro de Ayuda de Prompts</h2>
+  </div>
+
+  <div class="contenido-scrollable"> 
+  @for (prompt_ayuda  of vis_prompt_ayuda; track prompt_ayuda) {
+    <ul>
+      <li>
+          <button type="button" name="btnToggleLista" (click)="toggleLista('tema' + prompt_ayuda.correlativo)">
+            <svg width="16" height="16" viewBox="0 0 16 16" fill="green" xmlns="http://www.w3.org/2000/svg">
+                <path d="M2 5l6 6 6-6" stroke="green" stroke-width="2" fill="none"/>
+            </svg>{{ prompt_ayuda.tema }}</button>
+          <div id="tema{{ prompt_ayuda.correlativo }}" class="contenido-ayuda">
+            <p class="p-ayuda">{{ prompt_ayuda.ayuda }}</p>
+            
+            <button type="button" name="btnInsertar" (click)="insertarPrompt('tema' + prompt_ayuda.correlativo)">Insertar Prompt</button>
+          </div>
+      </li>
+    </ul>
+    }
+  </div>
+  <!--<div>
+  <button type="button" (click)="cerrarAyudaPopup()">Cerrar</button>
+  </div> -->
+
+  <div class="form-actions">
+    <button type="button" name="btnCerrarAyudaPopup" (click)="cerrarAyudaPopup()">Cerrar</button>
+  </div>
+
+</div>

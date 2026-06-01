@@ -10,3 +10,10 @@ python_django_cvia/cvia_dg_app/curriculumia/data/*
 
 # Pero permitir el archivo .gitkeep
 !python_django_cvia/cvia_dg_app/curriculumia/data/.gitkeep
+
+# Ignorar configuraciones de VS Code
+angular_cvia/app_cvia/.vscode/
+angular_cvia/app_cvia/.angular/
+
+# Ignorar dependencias de Node.js
+angular_cvia/app_cvia/node_modules/

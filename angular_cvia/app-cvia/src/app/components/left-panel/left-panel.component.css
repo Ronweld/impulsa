@@ -1,0 +1,314 @@
+.left-panel { 
+  /*border: none;*/
+  background-color: #ddd;
+  position: absolute; /* Necesario para que los elementos posicionados dentro se alineen correctamente */ 
+  width: 19.5%; /* O el ancho que desees para el panel izquierdo */ 
+  height: 92.5%; /* 🔥 Que ocupe toda la altura */
+  flex-grow: 1; 
+  /*border: 10px solid #ddd; */
+  padding: 10px 10px; 
+  font-family: 'Arial', sans-serif; 
+  font-size: 12px; 
+  overflow: auto; /* Permite el scroll si es necesario */ 
+  box-sizing: border-box; /* Asegúrate de incluir paddings y bordes */ 
+  border-radius: 25px;
+  /*border:#f7ea03;
+  border-style: double;*/
+}
+
+.left-panel ul { 
+  border: none;
+  list-style-type: none; 
+  padding: 0; 
+}
+
+.left-panel ul li { 
+  border: none;
+  display: flex; /* Utiliza flexbox para alinear los elementos */ 
+  justify-content: space-between; /* Distribuye el texto y el botón dentro del ancho disponible */ 
+  align-items: center; /* Centra verticalmente */ 
+  background: #f8f8f8; 
+  margin-bottom: 5px; 
+  padding: 1px; /* Opcional: Agrega algo de espacio interno */ 
+  border: 1px solid #ddd; /* Opcional: Añade un borde para mayor claridad */ 
+  border-radius: 3px; /* Bordes redondeados */ 
+} 
+
+.left-panel ul li button { 
+  flex-shrink: 0; /* Evita que el botón cambie de tamaño */ 
+}
+
+.left-panel .bottom-buttons { 
+  background-color: #ddd;
+  position: absolute; /* Permite posicionarlo dentro del contenedor */ 
+  bottom: 15%; /* Ajusta la distancia desde la parte inferior */ 
+  left: 0; /* Ajusta la distancia desde el borde izquierdo */ 
+  width: 100%; /* Hace que ocupe todo el ancho del panel */ 
+  display: flex; 
+  flex-direction: column; /* Alinea los botones verticalmente */ 
+  gap: 20px; /* Espaciado entre los botones */ 
+  align-items: center; /* Centra los elementos horizontalmente */ 
+  justify-content: center;
+  padding: 0.1rem 0.4rem; /* Agrega un pequeño margen interior a los lados */ 
+  box-sizing: border-box; /* Incluye el relleno en el cálculo del ancho */ 
+} 
+
+@media (max-width: 600px) {
+  .left-panel .bottom-buttons {
+    width: 100%;
+    font-size: 0.8rem;
+    padding: 0.4rem;
+    box-sizing: border-box;
+  }
+}
+
+.left-panel .bottom-buttons ul { 
+  background-color: #ddd; 
+  width: 100%; /* Asegura que la lista ocupe todo el ancho */ 
+  padding: 0; /* Quita el espacio extra predeterminado */ 
+  margin: 0; /* Elimina el margen predeterminado */ 
+  list-style: none; /* Elimina las viñetas predeterminadas */ 
+} 
+
+.left-panel .bottom-buttons ul li { 
+  background-color: #ddd; 
+  width: 100%; /* Cada elemento ocupa todo el ancho del contenedor */ 
+  border: none; /* Elimina cualquier borde visible */ 
+  padding: 0; /* Ajusta el relleno */ 
+  margin: 0.5; /* Quita cualquier espaciado extra */ 
+} 
+
+.left-panel .bottom-buttons ul li button { 
+  margin: 0px; 
+  padding: 5px 5px; 
+  font-size: 10px; 
+  color: white; 
+  background-color: #4CAF50; 
+  border: none; 
+  border-radius: 10px; 
+  cursor: pointer; 
+  transition: background-color 0.3s, transform 0.2s; /* Transición suave */ 
+  text-align: center; /* Centra el texto dentro del botón */ 
+  justify-content: center;
+  width: 98%; /* Cada botón ocupará todo el ancho disponible */ 
+  box-sizing: border-box; /* Incluye el relleno y bordes en el ancho total */ 
+} 
+
+.left-panel .bottom-buttons button:hover { 
+  background-color: #0056b3; /* Azul más oscuro al pasar el cursor */ 
+  transform: scale(1.05); /* Efecto de zoom al pasar el cursor */ 
+} 
+
+h5, input {
+  display: flex;
+  margin-bottom: 0px;
+  margin-top: 0px;
+}
+
+h6 {
+  display: flex;
+  margin-bottom: 5px;
+  margin-top: 5px;
+}
+
+.h6-span { 
+  flex: 1; /* 🔥 Permite que el texto ocupe el espacio disponible */ 
+  white-space: pre-wrap;
+  white-space: normal; /* 🔥 Si el nombre es largo, ocupa otra línea */ 
+  text-overflow: ellipsis; /* Trunca texto largo */ 
+  overflow: hidden; /* 🔥 Evita que el texto desborde el contenedor */
+  word-wrap: normal; 
+  margin: 0% 2.5%; /* 🔥 Reduce espacio vertical entre elementos */
+}
+
+.tabla-menu-mi-pri-cv {
+    width: 100%;
+    display: table;
+    border-collapse: collapse; /* Reduce espacio entre filas */
+    table-layout: fixed; /*✅ Hace que las columnas tengan tamaños iguales */
+}
+
+@media (max-width: 600px) {
+  .tabla-menu-mi-pri-cv {
+    width: 100%;
+    font-size: 0.8rem;
+    padding: 0.4rem;
+    box-sizing: border-box;
+  }
+}
+
+.tabla-menu-mi-pri-cv tr {
+    display: table-row;
+}
+
+.tabla-menu-mi-pri-cv td {
+    padding: 1px; /* Reducimos el espacio interno */
+    margin: 0; /* Eliminamos el margen */
+}
+
+.tabla-menu-mi-pri-cv .left {
+    text-align: left;
+    width: 50%;
+}
+
+.tabla-menu-mi-pri-cv .right {
+    text-align: right;
+    width: 50%;
+}
+
+.tabla-menu-mi-pri-cv .right a {
+    text-decoration: none;
+    color: #439557;
+    font-weight: bold;
+    cursor: pointer;
+    transition: color 0.3s, font-weight 0.3s;
+}
+
+.tabla-menu-mi-pri-cv td.right a:hover {
+    color: #02cd35;
+    text-decoration: underline;
+}
+
+.file-options {
+  display: none;
+  position: absolute;
+  margin-left: 2%;
+  background: white;
+  border-radius: 10px; /* ✅ Bordes redondeados */
+  border: 1px solid rgba(0, 0, 0, 0.2);
+  box-shadow: 4px 4px 10px rgba(0, 0, 0, 0.3); /* ✅ Efecto flotante */
+  padding: 8px;
+  z-index: 100; /* Asegura que esté sobre otros elementos */
+}
+
+
+.file-options.show {
+  display: flex;
+  flex-direction: column;
+  gap: 1px; /* 🔽 Reduce el espacio entre elementos */
+}
+
+.file-options button {
+  display: flex;
+  align-items: center;
+  padding: 5px;
+  border: none;
+  cursor: pointer;
+  background-color: rgb(255, 255, 255);
+  transition: background-color 0.3s, color 0.3s; /* Animación suave */
+  font-size: 10px; /* 🔽 Ajusta el tamaño de fuente para mayor compacidad */
+}
+
+.file-options button:hover {
+  background-color: #d4edda;
+  color: #353535;
+  border-radius: 5px; /* Suaviza las esquinas al hacer hover */
+}
+
+.file-options i {
+  margin-right: 3px;
+}
+
+.span-disabled {
+  border: none; /* 🔽 Elimina cualquier borde */
+  outline: none; /* 🔽 Asegura que tampoco tenga un contorno */
+  box-shadow: none !important; /* 🔽 Elimina cualquier sombra que parezca un borde */
+  background: transparent; /* 🔽 Asegura que no haya fondo que simule un borde */
+  color: gray;  /* Color gris para indicar estado inactivo */
+  opacity: 0.6; /* Reduce la opacidad */
+  pointer-events: none; /* Evita interacción con el archivo */
+  text-decoration: line-through; /* ✅ Añade el efecto de tachado */
+}
+
+.tabla-menu-file {
+  position: relative; /* 🔑 hace que el submenu se ancle al archivo */
+  border:#02cd35; /* 🔽 Elimina cualquier borde */
+  outline: #02cd35; /* 🔽 Asegura que tampoco tenga un contorno */
+  width: 100%;
+  table-layout: fixed; /*✅ Hace que las columnas tengan tamaños iguales */
+  font-size: 10px; /* 🔽 Ajusta el tamaño de fuente para mayor compacidad */
+  border-collapse: separate;
+  border-spacing: 0;
+}
+
+@media (max-width: 600px) {
+  .tabla-menu-file {
+    width: 100%;
+    font-size: 0.8rem;
+    padding: 0.2rem;
+    box-sizing: border-box;
+  }
+}
+
+.fila-nombre-file {
+  position: relative; /* 🔑 ancla el submenu al archivo */
+}
+
+.tabla-menu-file .fila-nombre-file .nombre-file {
+  width: 90%;
+  padding: 0.3rem;
+}
+
+.tabla-menu-file .fila-nombre-file .tres-puntos{
+  width: 10%;
+}
+
+.tabla-menu-file .fila-nombre-file .tres-puntos .menu-button{
+  border: none;
+  border-radius: 50%; /* Bordes redondeados */ 
+  width: 90%; /* ✅ Hace que esta columna tenga el mismo tamaño */
+  padding: 0.2rem;
+  vertical-align: middle; 
+  justify-content: center;
+}
+
+.tabla-menu-file .fila-nombre-file .tres-puntos .menu-button:hover {
+  background-color: #40906c; /* 🔥 Color de fondo al pasar el mouse */
+  cursor:pointer;
+}
+
+.tabla-menu-file .fila-nombre-file {
+  background-color: #ddd; /* 📌 Color inicial */
+  overflow: hidden; /* 🔥 Evita que los bordes sean ignorados */
+  transition: background-color 0.3s ease, border-radius 0.3s ease; /* ✨ Suaviza el efecto */
+  padding: 8px; /* 🖼️ Mejora la distribución */
+}
+
+.tabla-menu-file .fila-nombre-file:hover {
+  background-color: #d4edda; /* 🔥 Color de fondo al pasar el mouse */
+  cursor:pointer;
+}
+
+.custom-file-upload {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  width: 80%;
+  display: inline-block;
+  background-color: #4CAF50;
+  color: white;
+  padding: 5px 15px;
+  border-radius: 8px;
+  cursor: pointer;
+  font-size: 10px;
+  font-weight: 500;
+  transition: background-color 0.3s ease;
+  text-align: center;
+  white-space: nowrap;
+}
+
+.custom-file-upload:hover {
+  background-color: #d4edda;
+}
+
+.custom-file-upload input[type="file"] {
+  display: none; /* Oculta el input real */
+}
+
+@media (max-width: 600px) {
+  .custom-file-upload {
+    width: 100%;
+    font-size: 0.8rem;
+    padding: 0.4rem;
+    box-sizing: border-box;
+  }
+}

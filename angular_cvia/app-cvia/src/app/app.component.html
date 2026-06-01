@@ -1,0 +1,93 @@
+<body>
+  <div class="contenedor">
+    <div class="header">
+      <app-header></app-header>
+      @if (isMobile) {
+        <div class="panel-toggle-buttons">
+          <button (click)="showLeft()" [class.active]="showLeftPanel">Archivos</button>
+          <button (click)="showRight()" [class.active]="showRightPanel">Chat</button> 
+          <button (click)="showSubRight()" [class.active]="showRightSubPanel">Opciones</button>
+        </div>
+      }
+    </div>
+
+    @if (showLoginComponent) {
+      <app-login></app-login>
+    }
+    @if (showUsuarioAgregarComponent) {
+      <app-usuarios></app-usuarios>
+    }
+    @if (showUsuarioSeleccionarComponent) {
+      <app-usuarios></app-usuarios>
+    }
+    
+    @if (showDarBajaComponent) {
+      <app-usuariosbaja></app-usuariosbaja>
+    }
+    
+    @if (showCambioPasswordComponent) {
+      <app-password></app-password>
+    }
+    @if (showPrimerCVComponent) {
+      <app-primercv></app-primercv>
+    }
+    @if (showAyudaPromptComponent) {
+      <app-ayudaprompt [vis_prompt_ayuda]="vis_prompt_ayuda"></app-ayudaprompt>
+    }
+    @if (showOportunidadesFortalezasComponent) {
+      <app-oportunidadesfortalezas (historialActualizadoof)="actualizarHistorialof($event)"></app-oportunidadesfortalezas>
+    }
+    
+    @if (showCartaPresentacionComponent) {
+      <app-cartapresentacion (cartaPresentacion)="manejarNuevaCarta($event)"></app-cartapresentacion>
+    }
+
+    <div class="left-panel-container">
+      @if (showLeftPanel) {
+        <div class="left-panel">
+          <app-left-panel (fileSelected)="updatePreview($event)"
+                          (historialActualizado)="actualizarHistorial($event)"
+                          (abrirCVPopup)="handleAbrirCV()"
+                          [pdfMiPrimerCV]="pdfMiPrimerCV"
+                          (vis_prompt_ayuda)="actualizarPromptAyuda($event)"
+                          [datosParaCarta]="cartaPresentacion">
+          </app-left-panel>
+        </div>
+      }
+<!--
+      @if (!isMobile) {
+        <div class="resize-handle" (mousedown)="initResize($event)"></div>
+      }
+    -->
+
+      @if (showRightPanel) {
+        <div class="right-panel-wrapper" [class.has-sub-panel]="showRightSubPanel">
+          <div class="right-panel" >
+            <app-right-panel id="app-right-panel"
+                            [previewFile]="previewFile"
+                            [historial]="historial"
+                            (historialActualizado)="actualizarHistorial($event)"
+                            (cerrarPopup)="cerrarFormulario()"
+                            (pdfMiPrimerCV)="pdfMiPrimerCV = $event">
+            </app-right-panel>
+            
+          </div>
+          <div class="right-sub-panel">
+            <div class="sub-panel-header">
+              <button class="toggle-subpanel-button" (click)="toggleRightSubPanel()">
+                {{ showRightSubPanel ? '❮ ' : '❯ ' }}
+              </button>
+            </div>
+
+            @if (showRightSubPanel) {
+              <div class="sub-panel-content">
+                <app-right-sub-panel></app-right-sub-panel>
+              </div>
+            }
+          </div>
+        </div>
+      }
+
+    </div>
+  </div>
+</body>

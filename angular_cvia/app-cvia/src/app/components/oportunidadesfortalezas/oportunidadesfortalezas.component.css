@@ -1,0 +1,156 @@
+.overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    background: rgba(0, 0, 0, 0.5); /* Fondo oscuro */
+    z-index: 99; /* Debajo del formulario */
+    pointer-events: all; /* 🔥 Bloquea interacción con todo detrás */}
+
+.oportunidadesfortalezas-panel {
+  position: fixed;
+  top: 45%; /* Centrado mejorado */
+  left: 50%;
+  /*display: flex;
+  justify-content: center; */
+  transform: translate(-50%, -50%);
+  /*background: white;*/
+  background-color: white;
+  padding: 20px;
+  border-radius: 8px;
+  box-shadow: 0px 4px 12px rgba(0, 0, 0, 0.15);
+  max-width: 500px;
+  width: 100%;
+  z-index: 100;
+  color: #bd0404;
+  pointer-events: auto; /* Permite interacción solo con el formulario */
+}
+
+.oportunidadesfortalezas-panel input, .oportunidadesfortalezas-panel select {
+    width: 100%;
+    padding: 10px;
+    margin: 5px 0;
+    /*border: none;*/
+    border-radius: 5px;
+    font-size: 14px;
+}
+
+.oportunidadesfortalezas-panel h2 {
+    background-color: #28a745; /* Verde */
+    text-align: center;
+
+    font-family: "Arial", sans-serif; /* 🔥 Fuente moderna y clara */
+    margin-top: 0%;
+
+    /*height: 4vh;*/
+    padding: 2px; /* Espaciado interno */
+    font-size: 16px; /* Tamaño del texto */
+    font-weight: bold; /* Hace el texto más grueso */
+    border-radius: 8px; /* Bordes redondeados */
+    box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.2); /* Sombra suave */
+    color: white;
+}
+
+.form-single textarea {
+  width: calc(100% - 20px);
+  height: 40vh;
+  padding: 10px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  font-size: 14px; /* Reduce el tamaño de la fuente */
+  font-family: Arial, sans-serif; /* Cambia la fuente */
+}
+
+.form-actions {
+  display: flex;
+  gap: 10px; /* Espacio entre botones */
+}
+
+button {
+    background-color: #02c26f;
+    color: white;
+    padding: 10px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-weight: bold;
+    width: 100%;
+    margin: 5px 0;
+}
+
+button:hover {
+    background-color: #017d47;
+}
+
+.cancelarof {
+    padding: 10px 20px;
+    width: 50%;
+    border: none;
+    background-color: #dc3545;
+    color: white;
+    font-size: 14px;
+    justify-content: right;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background 0.3s;
+}
+
+.cancelarof:hover {
+    background-color: #a71d2a;
+}
+
+.leyenda {
+  font-size: 10px; /* Reduce el tamaño de la fuente */
+  font-family: Arial, sans-serif; /* Cambia la fuente */
+  color: #666; /* Tono más tenue para no resaltar demasiado */
+  text-align: left; /* Centrado para mejor presentación */
+}
+
+.placeholder {
+  position: absolute;
+  left: 10px;
+  top: 8px;
+  font-size: 10px;
+  color: gray;
+  pointer-events: none;
+}
+
+.form-check {
+  margin-top: 10px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 15px;
+  color: #333;
+}
+
+.form-check input[type="checkbox"] {
+  width: 15px;
+  height: 15px;
+  font-family: "Arial", sans-serif; /* 🔥 Fuente moderna y clara */
+  accent-color: #02c26f; 
+  cursor: pointer;
+}
+
+.form-check label {
+  cursor: pointer;
+  user-select: none;
+}
+
+
+.errores {
+  color: red;
+  font-size: 14px;
+  background: #ffebe8;
+  padding: 10px;
+  border-radius: 5px;
+  margin-top: 15px;
+}
+.errores ul {
+  padding-left: 20px;
+}
+.errores li {
+  list-style-type: disc;
+}
+

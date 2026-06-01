@@ -1,0 +1,92 @@
+
+@if (mostrarFormulario) {
+  <div class="overlay"></div>
+}
+
+<div class="usuario-form">
+  <h2>Gestión de Usuarios</h2>
+  <div class="form-single">
+    <input type="text" [(ngModel)]="usuarioData.nombre_usuario" placeholder="Nombre de usuario *" [readonly]="modoEdicion">
+  </div>
+
+  <div class="form-row">
+    <input type="text" [(ngModel)]="usuarioData.apellido_paterno" placeholder="Apellido Paterno *">
+    <input type="text" [(ngModel)]="usuarioData.apellido_materno" placeholder="Apellido Materno">
+  </div>
+
+  <div class="form-single">
+    <input type="text" [(ngModel)]="usuarioData.nombres" placeholder="Nombres *">
+  </div>
+
+  <div class="form-row">
+    <input type="email" [(ngModel)]="usuarioData.email1" placeholder="Correo Electrónico 1*">
+    <input type="email" [(ngModel)]="usuarioData.email2" placeholder="Correo Electrónico 2">
+  </div>
+
+  <div class="form-single">
+    <input type="text" [(ngModel)]="usuarioData.celular" placeholder="Número de Celular *">
+  </div>
+
+  <div class="form-single">
+    <input type="text" [(ngModel)]="usuarioData.direccion" placeholder="Dirección *">
+  </div>
+
+  <div class="form-row">
+    <select [(ngModel)]="usuarioData.tipo_documento_identidad">
+      <option value="" disabled selected>Tipo Documento *</option>
+      <option value="01">DNI</option>
+      <option value="02">Pasaporte</option>
+      <option value="03">Carnet de Extranjería</option>
+      <option value="04">Registro Único de Contribuyentes (RUC)</option>
+    </select>
+    <input type="text" [(ngModel)]="usuarioData.numero_documento_identidad" placeholder="Número Documento *">
+  </div>
+
+    @if (!modoEdicion) {
+    <div class="form-row">
+    <div class="password-container">
+      <input [type]="mostrarPassword ? 'text' : 'password'" [(ngModel)]="usuarioData.password" placeholder="Contraseña *">
+      <span class="toggle-password" (click)="togglePasswordVisibility()">
+        {{ mostrarPassword ? '🔒' : '👁️' }}
+      </span>
+    </div>
+
+    <!--<div class="form-row password-container">-->
+    <div class="password-container">
+      <input 
+        [type]="mostrarConfirmPassword ? 'text' : 'password'" 
+        [(ngModel)]="confirmPassword" 
+        placeholder="Confirmar Contraseña *"
+        (input)="validarPasswords()">
+      <span class="toggle-password" (click)="toggleConfirmPasswordVisibility()">
+        {{ mostrarConfirmPassword ? '🔒' : '👁️' }}
+      </span>
+    </div>
+    </div>
+    
+    <div class="password-error" >
+      @if (!datosValidos) {
+        {{ passwordError }}
+      }
+    </div>
+    }
+
+  <!-- Mostrar solo el botón correcto -->
+  <div class="form-actions">
+    @if (!modoEdicion) {
+      <button (click)="agregarUsuario()">Agregar Usuario</button>
+    }
+    @if (modoEdicion) {
+      <button (click)="actualizarUsuario()">Actualizar Datos</button>
+    }
+      <button  class="cancelar" (click)="closeUsuario()">Cancelar</button>
+  </div>
+
+  <div class="errores" *ngIf="errores.length > 0">
+    <p>⚠️ Errores encontrados:</p>
+    <ul>
+      <li *ngFor="let error of errores">{{ error }}</li>
+    </ul>
+  </div>
+
+</div>

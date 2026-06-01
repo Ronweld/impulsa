@@ -1,0 +1,45 @@
+
+<link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+
+<div class="right-extra-panel">
+
+  <div class="barra-arrastre" >
+      <h2>Opciones</h2>
+  </div>
+
+  <div class="contenido-scrollable"> 
+    <ul>
+      <li>
+          <button 
+          type="button" 
+          name="btnToggleLista" 
+          (click)="toggleLista('idcontenido')"
+          >
+            <svg width="16" height="16" viewBox="0 0 16 16" fill="green" xmlns="http://www.w3.org/2000/svg">
+                <path d="M2 5l6 6 6-6" stroke="green" stroke-width="2" fill="none"/>
+            </svg>Tipo de curriculum
+          </button>
+          <div id="idcontenido" class="contenido-ayuda">
+            <form [formGroup]="formularioCurriculum">
+              <div class="opciones-radio">
+              @for (clave of objectKeys(opc_tipo_cv); track clave) {
+                <label>
+                  <input 
+                  type="radio" 
+                  [value]="clave"
+                  [checked]="formularioCurriculum.get('tipo')?.value === clave"
+                  (click)="alternarSeleccion(clave)"
+                   />
+                  {{ opc_tipo_cv[clave] }}
+                </label><br>
+              }
+              </div>
+            </form>
+
+          </div>
+      </li>
+    </ul>
+    <!--}-->
+  </div>
+
+</div>

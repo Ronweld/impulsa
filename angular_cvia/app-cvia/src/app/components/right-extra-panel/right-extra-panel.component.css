@@ -1,0 +1,96 @@
+.right-extra-panel { 
+  position: absolute; /* Necesario para que los elementos posicionados dentro se alineen correctamente */ 
+  width: 90%; /* O el ancho que desees para el panel izquierdo */ 
+  height: 90%; /* Asegúrate de que tenga un tamaño definido */ 
+  flex-grow: 1; 
+  border: 0px solid #ddd; 
+  padding: 0px 4px; 
+  font-family: 'Arial', sans-serif; 
+  font-size: 10px; 
+  /*color: #333; */
+  overflow: hidden; /* Permite el scroll si es necesario */ 
+  box-sizing: border-box; /* Asegúrate de incluir paddings y bordes */ 
+  z-index: 90;
+  pointer-events: auto; /* Permite interacción solo con el formulario */
+  /*border:#2a0299;
+  border-style: double;*/
+}
+
+.right-extra-panel .contenido-scrollable {
+    max-height: 60vh; /* 🔥 Define el límite máximo para el contenido */
+    overflow: auto; /* 🔥 Permite el scroll cuando hay demasiado texto */
+    padding-right: 10px; /* 🔥 Evita que el scroll toque el borde */
+    margin: 0px;
+}
+
+.right-extra-panel h2 {
+    background-color: #28a745; /* Verde */
+    text-align: center;
+
+    font-family: "Arial", sans-serif; /* 🔥 Fuente moderna y clara */
+    margin-top: 0.5%;
+
+    /*height: 4vh;*/
+    padding: 5px; /* Espaciado interno */
+    font-size: 12px; /* Tamaño del texto */
+    font-weight: bold; /* Hace el texto más grueso */
+    border-radius: 8px; /* Bordes redondeados */
+    box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.2); /* Sombra suave */
+    color: white;
+}
+
+.right-extra-panel .form-actions {
+  display: flex;
+  gap: 10px; /* Espacio entre botones */
+  justify-content: center; /* Centra los botones horizontalmente */
+  align-items: center; /* Centra los botones verticalmente */
+}
+
+button[name="btnToggleLista"] {
+    all: unset; /* 🔥 Elimina todos los estilos predeterminados del botón */
+    cursor: pointer; /* 🔥 Indica que es interactivo */
+    color: #02c26f; /* 🔥 Color verde para hacerlo más visible */
+    font-size: 12px; /* 🔥 Tamaño del texto */
+    font-weight: bold; /* 🔥 Resalta el texto */
+    font-family: "Roboto", sans-serif; /* 🔥 Cambia la fuente */
+    display: flex; /* 🔥 Asegura alineación correcta con el ícono */
+    align-items: center; /* 🔥 Centra el texto e icono verticalmente */
+    gap: 4px; /* 🔥 Espaciado entre el texto y el icono */
+    transition: color 0.3s ease-in-out; /* 🔥 Efecto suave en el color */
+}
+
+button[name="btnToggleLista"]:hover {
+    color: #017d47; /* 🔥 Cambia el color al pasar el cursor */
+}
+
+.contenido-ayuda {
+    display: none;
+    padding: 1px;
+    background: #d4edda;
+    margin-top: 0px;
+    border-radius: 5px;
+    margin: 0px;
+    position: relative; /* 🔥 Permite que los elementos internos se posicionen de forma absoluta */
+}
+
+.contenido-ayuda .opciones-radio {
+    background-color: #d4edda; /* 🔥 Verde claro, suave */
+    padding: 10px; /* 🔥 Espaciado interno para mejor presentación */
+    border-radius: 5px; /* 🔥 Bordes suavemente redondeados */
+    color: #155724; /* 🔥 Texto en verde oscuro para buen contraste */
+    font-size: 10px; /* 🔥 Tamaño de texto óptimo */
+    font-weight: normal; /* 🔥 Mantiene el estilo de fuente sin exagerarlo */
+    border-left: 4px solid #28a745; /* 🔥 Bordes decorativos en el lado izquierdo */
+    margin: 0px; /* 🔥 ELIMINA márgenes externos que puedan generar fondo extra */
+    display: block; /* 🔥 Asegura que el `p` ocupe toda la línea */
+}
+
+
+ul {
+    list-style-type: none;
+    padding: 0;
+}
+
+li {
+    margin-bottom: 10px;
+}

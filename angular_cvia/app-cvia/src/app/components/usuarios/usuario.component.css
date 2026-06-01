@@ -1,0 +1,139 @@
+.overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    background: rgba(0, 0, 0, 0.5); /* Fondo oscuro */
+    z-index: 99; /* Debajo del formulario */
+    pointer-events: all; /* 🔥 Bloquea interacción con todo detrás */}
+
+/* Ajuste del formulario */
+.usuario-form {
+    position: fixed;
+    top: 45%; /* Centrado mejorado */
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background-color: white;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0px 4px 12px rgba(0, 0, 0, 0.15);
+    max-width: 400px;
+    width: 100%;
+    z-index: 100;
+    pointer-events: auto; /* Permite interacción solo con el formulario */
+}
+
+.usuario-form h2 {
+    background-color: #28a745; /* Verde */
+    text-align: center;
+    font-family: "Arial", sans-serif; /* 🔥 Fuente moderna y clara */
+    margin-top: 0%;
+    padding: 2px; /* Espaciado interno */
+    font-size: 16px; /* Tamaño del texto */
+    font-weight: bold; /* Hace el texto más grueso */
+    border-radius: 8px; /* Bordes redondeados */
+    box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.2); /* Sombra suave */
+    color: white;
+}
+
+.usuario-form input, .usuario-form select {
+    width: 100%;
+    padding: 10px;
+    margin: 5px 0;
+    /*border: none;*/
+    border-radius: 5px;
+    font-size: 12px;
+}
+
+.form-row {
+    display: flex;
+    gap: 10px;
+}
+
+.form-row input, .form-row select {
+    width: 50%;
+}
+
+.form-single {
+    display: flex;
+    justify-content: center;
+}
+
+.form-single input {
+    width: calc(100% - 10px);
+}
+
+.form-actions {
+  display: flex;
+  gap: 10px; /* Espacio entre botones */
+}
+
+button {
+    background-color: #02c26f;
+    color: white;
+    padding: 10px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-weight: bold;
+    width: 100%;
+    margin: 5px 0;
+}
+
+button:hover {
+    background-color: #017d47;
+}
+
+.cancelar {
+    background-color: #dc3545;
+    color: white;
+    padding: 10px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-weight: bold;
+    width: 100%;
+    margin: 5px 0;
+}
+
+.cancelar:hover {
+    background-color: #a71d2a;
+}
+
+.password-container {
+    display: flex;
+    align-items: center;
+    position: relative;
+}
+
+.password-container input {
+    width: 100%;
+    padding-right: 30px;
+}
+
+.toggle-password {
+    position: absolute;
+    right: 10px;
+    cursor: pointer;
+    font-size: 12px; /* Tamaño más pequeño del icono */
+    color: #666;
+}
+
+
+
+.errores {
+  color: red;
+  font-size: 12px;
+  background: #ffebe8;
+  padding: 10px;
+  border-radius: 5px;
+  margin-top: 15px;
+}
+.errores ul {
+  padding-left: 20px;
+}
+.errores li {
+  list-style-type: disc;
+}
+

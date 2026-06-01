@@ -1,0 +1,200 @@
+@if (mostrarFormulario) {
+  <div class="overlay"></div>
+}
+
+<!-- Contenedor del popup -->
+<div class="popup-convocatoria" [class.hidden]="!popupVisible" [ngStyle]="popupPosition"> 
+  <div class="popup-header">
+    <button (click)="minimizarPopup()" class="minimize-btn" title="Minimizar">➖</button>
+  </div>
+  <textarea id="convocatoriaInput" [(ngModel)]="convocatoriaInput" placeholder="Escribe o copia tu convocatoria aquí..."></textarea>
+
+  <div class="form-actions">
+    <button type="button" (click)="generate_cv_requerimiento()">Genera CV convocatoria</button>
+  </div>
+
+  <div class="errores" *ngIf="errores.length > 0">
+    <p>⚠️ Errores encontrados:</p>
+    <ul>
+      <li *ngFor="let error of errores">{{ error }}</li>
+    </ul>
+  </div>
+
+</div>
+
+<div class="right-panel">
+    <div class="visible" [class.hidden]="!isVisible" >
+
+    @if (previewFile) {
+      <div class="preview-container">
+        <div class="preview-header">
+          <button (click)="closePreview()" class="close-btn" title="Cerrar">❌</button>
+        </div>
+    
+        @if (previewFile.type.includes('image')) {
+          <img [src]="getSafeUrl()" alt="{{ previewFile.name }}">
+        } @else if (previewFile.type.includes('pdf')) {
+          <embed [src]="getSafeUrl()" type="application/pdf" width="100%" height="95vh">
+        } @else {
+          <p>No hay vista previa disponible para este tipo de archivo.</p>
+        }
+      </div>
+      }
+    </div>
+
+    <div class="chat-container">
+      <div class="historial">
+        @for (mensaje of historial; track mensaje.id; let indice = $index) {
+          <div class="solicitud">
+            <table class="table-hist">
+              @if (!mensaje.eseditable) {
+                <tr><td>
+                </td></tr>
+              }
+
+              @if (mensaje.eseditable && !enEdicion) {
+                <tr><td>
+                  <button class="btn-editar-superior" (click)="activarEdicion(mensaje.eseditable)" title="Editar solicitud">
+                      <i class="fas fa-edit"></i> Editar
+                  </button>
+                </td></tr>
+              }
+
+              @if (mensaje.eseditable && enEdicion) {
+                <tr><td>
+                  <textarea class="txt-are-edi-sol" #textoEdicionSolicitud [(ngModel)]="mensaje.solicitud"></textarea>
+                </td></tr>
+                <tr><td>
+                  <button class="btn-guardar" (click)="guardarEdicion(mensaje.id, enEdicion, textoEdicionSolicitud.value)" title="Guardar cambios">
+                    <img src="assets/icons/save-icon.svg" alt="Guardar">
+                  </button>
+                  <button class="btn-cancelar" (click)="cancelarEdicion()" title="Cancelar edición">
+                    <img src="assets/icons/cancel-icon.svg" alt="Cancelar">
+                  </button>
+                </td></tr>
+              } @else {
+                <!--<p>{{ mensaje.solicitud }}</p> -->
+                <tr><td>
+                  <div class="markdown-container">
+                    <markdown [data]="mensaje.solicitud"></markdown> <!-- 📌 Renderiza Markdown -->
+                  </div>
+                </td></tr>
+              }
+
+              @if (mensaje.eseditable && !enEdicion) {
+                <tr><td>
+                  <!--<button class="btn-editar-inferior" (click)="activarEdicion(mensaje.eseditable)" title="Editar solicitud">
+                    <img src="assets/icons/edit-icon.svg" alt="Editar">
+                  </button>-->
+                  <button class="btn-editar-inferior" (click)="activarEdicion(mensaje.eseditable)" title="Editar solicitud">
+                      <i class="fas fa-edit"></i> Editar
+                  </button>
+                </td></tr>
+              }
+            </table>
+          </div>
+
+          <div class="respuesta">
+            <table class="table-hist">
+            @if (mensaje.respuesta) {
+              <tr><td>
+                  <button class="btn-env-email">
+                      <i class="fas fa-envelope"></i> Enviar mail
+                  </button>
+                  <button class="btn-grabar-pdf" (click)="imprimirPDF(indice)">
+                      <i class="fas fa-file-pdf"></i> Grabar PDF
+                  </button>
+                  <button class="btn-cpy-sup" (click)="copiarTextoProcesado(indice)" title="Copiar respuesta">
+                    <i class="fas fa-copy"></i> Copiar
+                  </button>
+              </td></tr>
+
+              <tr><td>
+              <!-- <p>{{ mensaje.respuesta }}</p> -->
+              <div #markdownContainer class="markdown-container">
+                <markdown [data]="mensaje.respuesta"></markdown> <!-- 📌 Renderiza Markdown -->
+              </div>
+              </td></tr>
+            } @else {
+              <tr><td>
+              <p>⌛ Cargando respuesta...</p>
+              </td></tr>
+            }
+                <tr><td>
+                  <button class="btn-env-email">
+                      <i class="fas fa-envelope"></i> Enviar mail
+                  </button>
+                  <button class="btn-grabar-pdf" (click)="imprimirPDF(indice)">
+                      <i class="fas fa-file-pdf"></i> Grabar PDF
+                  </button>
+                  <button class="btn-cpy-sup" (click)="copiarTextoProcesado(indice)" title="Copiar respuesta">
+                    <i class="fas fa-copy"></i> Copiar
+                  </button>
+              </td></tr>
+            </table>
+        </div>  
+      }
+      </div>
+
+      <div class="btnConvocatoria d-flex flex-column gap-3">
+        
+        <div class="d-flex align-items-center gap-3">
+          <button class="btn btn-success rounded-pill w-25 shadow-sm small" (click)="abrirConvocatoria()">
+            Escribe o copia tu convocatoria
+          </button>
+
+          <div class="flex-shrink-0">
+            <!--<div class="form-floating">-->
+              <select class="form-select form-select-sm rounded-pill shadow-sm" 
+                      id="idiomaSeleccionado" 
+                      [(ngModel)]="idiomaSeleccionado" 
+                      (change)="onChangeIdioma($event)">
+                <option value="" disabled selected>Idioma respuesta</option>
+                <option *ngFor="let opt of opciones" [value]="opt.codigo">{{ opt.valor }}</option>
+              </select>
+        </div>
+
+      <!-- Botón para abrir Prepara Entrevista -->
+      <button 
+            *ngIf="isLoggedIn$ | async"
+              class="btn btn-outline-success rounded-pill w-25 shadow-sm small" 
+              (click)="preparaEntrevista()" 
+              data-bs-toggle="modal" 
+              data-bs-target="#preparaEntrevistaModal">
+              Prepárate para tu entrevista
+      </button>
+
+      </div>
+      <div class="area-input">
+        <div class="input-container">
+            <textarea class="textarea-prompt" id="promptChat" (input)="updatePrompt($event)" placeholder="Escribe tu prompt aquí..."></textarea>
+            <button class="btnGeneraSolicitudCV" (click)="generate_solicitud_cv()">Enviar</button>
+        </div> 
+      </div>
+    
+    </div>
+
+</div>
+
+
+      <!-- Modal de Bootstrap -->
+      <div class="modal fade" id="preparaEntrevistaModal" tabindex="-1" aria-labelledby="preparaEntrevistaLabel" aria-hidden="true" [ngClass]="{'show': mostrarPreparaEntrevista}" [style.display]="mostrarPreparaEntrevista ? 'block' : 'none'">
+        <div class="modal-dialog modal-xl modal-dialog-centered">
+          <div class="modal-content">
+            <div class="modal-header bg-primary text-white">
+              <h5 class="modal-title" id="preparaEntrevistaLabel">Prepárate para tu entrevista</h5>
+              <button type="button" class="btn-close btn-close-white" (click)="mostrarPreparaEntrevista = false" data-bs-dismiss="modal" aria-label="Cerrar"></button>
+            </div>
+            <div class="modal-body p-0">
+              <iframe 
+                #preparaEntrevistaIFrame
+                *ngIf="safeIframeUrl"
+                [src]="safeIframeUrl"
+                class="w-100 border-0" 
+                style="height:80vh;">
+              </iframe>
+            </div>
+          </div>
+        </div>
+      </div>
+
