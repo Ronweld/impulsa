@@ -6,7 +6,7 @@
 __pycache__/
 
 # Ignorar carpetas 
-python_django_cvia/cvia_dg_app/curriculumia/data
+python_django_cvia/cvia_dg_app/curriculumia/data/*
 
 # Pero permitir el archivo .gitkeep
 !python_django_cvia/cvia_dg_app/curriculumia/data/.gitkeep
