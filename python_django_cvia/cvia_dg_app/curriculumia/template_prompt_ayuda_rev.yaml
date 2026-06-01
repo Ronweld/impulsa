@@ -1,0 +1,156 @@
+prompt_tema01:
+  tema: >
+    Se le proporcionará un texto de documentos, que son parte de un prospecto
+  ayuda: >
+    Se le proporcionará un texto de documentos, que son parte de un prospecto o candidato postulante a un puesto laboral. 
+    El texto del documento estará delimitado por {delimitador} caracteres.
+    Tu tarea es clasificar el documento dado en alguna categoría. Las categorías puede ser las siguientes:
+    - Datos personales
+    - Documento académico
+    - Documento laboral
+    - Curriculum vitae
+    
+    Luego por cada categoría determinar que tipo de documento al que pertenece a dicha categoría:
+    Documentos a considerar como datos personales:
+    - DNI
+    - Pasaporte
+    - RUC
+    - Carnet de extranjería
+    - Visa
+    
+    Documentos a considerar como documentos académicos
+    - certificado de estudios 
+    - Constancia de estudios
+    - cursos
+    - cursos de especialización
+    - talleres
+    - diplomados
+    - especializaciones
+    - certificaciones
+    - congresos
+    - título de grado profesional
+    - bachiller
+    - título de máster
+    - título de magister
+    - título de doctor
+    - educación secundaria
+    - educación primaria
+    - sin educación
+    - Otros (que tu puedas sugerir)
+    
+    Documentos a considerar como documentos laborales:
+    - certificado de trabajo
+    - certificado de practicas
+    - constancia de trabajo
+    - constancia de prácticas
+    
+    Documento a considerar como curriculum vitae:
+    - Es un documento que puede tener el resto de categorías.
+    
+    Proporcione el resultado al usuario en formato JSON con una sola de las claves: personal, académico, laboral y curriculum vitae;
+    y su valor debe de estar dado por el tipo de documento al que pertenece en la categoría' que fue encontrado.
+    El resultado en formato JSON debe de ser un solo elemento.
+    Si el documento no clasifica en ninguna categoría, el resultado será un JSON con clave que diga vacio.
+    Si el documento no clasifica en ninguna categoría, no haga ninguna sugerencia.
+    Previo a proporcionar el resultado usuario debe de estar seguro que solo se debe de proporcionar un solo elemento.
+    Solo se debe de proporcionar al usuario el JSON, no se debe proporcionar ninguna otro tipo de información. 
+
+prompt_tema02:
+  tema: >
+    candidato postulante a un puesto laboral
+  ayuda: >
+    Se le proporcionará un texto de documentos, que son parte de un prospecto o candidato postulante a un puesto laboral. 
+    El texto del documento estará delimitado por {delimitador} caracteres.
+    Tu tarea es extraer información del tipo académico:
+    La extración de información debe de ser por documento con los siguientes datos: 
+     - centro de estudios: este es el lugar donde se han realizado los estudios.
+     - nombre del titular del documento: El titular del documento es la persona a quién le pertenece el documento dado.
+     - nombre o título del tema: es el nombre del evento académico que ha cursado el nombre del titular.
+     - fecha de inicio: es la fecha cuando se inicia el evento académico.
+     - fecha final (o días que se llevó a cabo el evento académico)
+     - Duración (es el periodo que dura el evento académico)
+     - Fecha de emisión: la fecha en que se emite el documento del evento académico.
+     Proporcione el resultado al usuario en un objeto LISTA, y cada elemento debe de tener el formato JSON.
+     Toda información que se extraiga debe de ser solo por documento dado.
+     Cuando imprima la data extraida, no se debe indicar otro tipo que no se haya encontrado.
+     Las fecha puedes manejarlo en formato corto o largo; no lo debes de manejar en formato ddmmaaaa o dddmmaa o dd.mm.aaaa o aaaa.mm.dd.
+    Solo se debe de proporcionar al usuario el objeto LISTA, no se debe proporcionar ninguna otro tipo de información. 
+     La información que se debe de presentar, solo se debe de imprimir la información encontrada, evitar poner como salida:
+     - No se menciona un curso específico en el documento o similares
+     - No se menciona
+     - Segurencias de otras formas de presentar a información.
+     - Presentar los mismos resultados dos o más veces, solo se debe mostrar una sola vez.
+  
+prompt_tema03:
+  tema: >
+    que son parte de un prospecto o candidato postulante
+  ayuda: >
+    Se le proporcionará un texto de documentos, que son parte de un prospecto o candidato postulante a un puesto laboral. 
+    El texto del documento estará delimitado por {delimitador} caracteres.
+    Tu tarea es extraer información del tipo laboral:
+    La extración de información debe de ser por documento con los siguientes datos: 
+     - centro laboral o empresa o institución.
+     - nombre del colaborador o trabajador
+     - Fecha de emisión
+     - Nombre del gerente o jefe o cargo similar a recursos humanos
+    Proporcione el resultado al usuario en un objeto LISTA, y cada elemento debe de tener el formato JSON.
+    Toda información que se extraiga debe de ser solo del documento dado.
+    Analiza el siguiente texto y extrae las fechas de inicio y finalización de labores del trabajador. Busca expresiones que indiquen el período laboral, como 'desde' seguido de una fecha y 'hasta' seguido de otra fecha. Devuelve solo las fechas exactas en formato 'DD/MM/AAAA'."
+    Los puestos/cargos laborales con sus fechas de inicio y finalización, se debe de imprimir cada puesto laboral con sus fechas, en el siguiente formato:
+    Nombre puesto/cargo: <<nombre_puesto>>, Fecha inicio: <<fecha_inicio>>, Fecha fin: <<fecha_fin>>.
+    Recordarte que los documentos de categoria laboral, siempre deben de tener fecha de inicio de labores, esto es obligatorio; por ello este dato siempre debes de mostrarlo al usuario.
+    Las fecha puedes manejarlo en formato corto o largo; no lo debes de manejar en formato ddmmaaaa o dddmmaa o dd.mm.aaaa o aaaa.mm.dd.
+    Si el puesto/cargo es el trabajo actual, no debe de tener fecha de finalización de labores, debe de indicar trabajo actual.
+    Sino existe trabajo actual, no imprimirlo.
+    Cuando imprima la data extraida, no se debe indicar otro tipo que no se haya encontrado.
+    Solo se debe de proporcionar al usuario el objeto LISTA, no se debe proporcionar ninguna otro tipo de información. 
+    La información que se debe de presentar, solo se debe de imprimir la información encontrada, evitar imprimir salidas como:
+    - No se menciona en el documento
+    - Segurencias de otras formas de presentar a información.
+    - Presentar los mismos resultados dos o más veces, solo se debe mostrar una sola vez.
+    
+prompt_tema04:
+  tema: >
+    que son parte de un prospecto o candidato postulante
+  ayuda: >
+    Se le proporcionará un texto de documentos, que son parte de un prospecto o candidato postulante a un puesto laboral. 
+    El texto del documento estará delimitado por {delimitador} caracteres.
+    Tu tarea es extraer información del tipo personal:
+    La extración de información debe de ser por documento con los siguientes datos: 
+    - numero de documento.
+    - nombre de la persona
+    - Fecha de emisión
+    - Fecha de vencimiento
+    Proporcione el resultado al usuario en un objeto lista, y cada elemento debe de tener el formato JSON.
+    Toda información que se extraiga debe de ser solo del documento dado.
+    Cuando imprima la data extraida, no se debe indicar otro tipo que no se haya encontrado.
+    Las fecha puedes manejarlo en formato corto o largo; no lo debes de manejar en formato ddmmaaaa o dddmmaa o dd.mm.aaaa o aaaa.mm.dd.
+    Solo se debe de proporcionar al usuario el objeto LISTA, no se debe proporcionar ninguna otro tipo de información. 
+    La información que se debe de presentar, solo se debe de imprimir la información encontrada, evitar imprimir salidas como:
+    - No se menciona en el documento
+    - Segurencias de otras formas de presentar a información.
+    - Presentar los mismos resultados dos o más veces, solo se debe mostrar una sola vez.
+    
+prompt_tema05:
+  tema: >
+    que son parte de un prospecto o candidato postulante
+  ayuda: >
+    Se le proporcionará un texto con una serie de documentos, que son parte de un prospecto o candidato postulante a un puesto laboral. 
+    El texto del documento estará delimitado por {delimitador} caracteres.
+    Tu tarea es encontrar el nombre del candidato postulante a un puesto laboral. Para poder determinar el nombre candidato debemos de hacer lo siguiente:
+    - Encontrar el nombre del titular de cada documento.
+    - En cada documento solo existe un solo titular, el resto de nombres que se puedan encontrar en el documento no necesariamente son dueños o titulares del documento, solo son nombres dentro del documento.
+    - El nombre del canditado será el nombre más frecuente de todos los documentos.
+    - El nombre o nombres de menor frecuencia serán considerados como nombre no candidato.
+    Proporcione el resultado al usuario una LISTA, con dos elementos que deben de tener el formato JSON; cuyas claves deben de ser: candidato y no_candidato.
+    El valor de candidato debe de ser una lista conteniendo un solo elemento JSON cuya clave es nombre y cuyo valor será el nombre del candidato.
+    El valor de no_candidato debe de ser una lista conteniendo un JSON con dos elementos cuyas claves debe de ser: nombre y archivo; el valor de nombre es el nombre de no candidatos y el valor de archivo es el nombre del archivo donde se ha encontrado el nombre del no candidato.
+    El nombre de la persona que se ha detectado como no titulares dentro del documento no se debe de imprimir en la salida al usuario.
+    En caso se detecte nombre(s) de una persona(s) que no es candidato(a), se debe indicar el nombre del archivo y la persona a quien le pertenece.
+    Los nombres que no son titulares del documento no se debe de imprimir como no_candidato.
+    Solo se debe de proporcionar al usuario el objeto LISTA, no se debe proporcionar ninguna otro tipo de información. 
+    Evitar imprimir como salida:
+    - Lo solicitado en los prompts
+    - Hacer segurencias de otras formas de presentar a información.
+    - Presentar los mismos resultados dos o más veces, solo se debe mostrar una sola vez.
+    - Nombres que se puedan encontrar en el documento, que no necesariamente son dueños o titulares del documento, solo son nombres dentro del documento.

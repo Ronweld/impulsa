@@ -1,0 +1,25 @@
+#Core Framework
+Django==5.1
+django-cors-headers==4.7.0
+djangorestframework==3.16.0
+djangorestframework_simplejwt==5.5.0
+# Database connector for PostgreSQL
+psycopg2-binary==2.9.11
+# Data Science/ML essentials
+numpy==1.26.4
+pandas==2.2.3
+scikit-learn==1.6.1
+langchain-core==0.3.51
+sentence-transformers==4.0.2
+openai==1.72.0
+opencv-python==4.11.0.86
+opencv-contrib-python==4.11.0.86
+opencv-python-headless==4.11.0.86
+together==1.5.5
+PyPDF2==3.0.1
+PyMuPDF==1.25.4
+pillow==11.1.0
+paddleocr==2.9.1
+paddlepaddle==3.0.0
+docx2pdf==0.1.8
+python-dotenv==1.2.1

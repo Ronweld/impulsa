@@ -1,0 +1,46 @@
+services:
+   srv_cvia_django51:
+     build:
+       context: .
+       dockerfile: Dockerfile
+     image: django51_cvia:dev
+     container_name: django51-cvia_container_dev # Contenedor personalizado
+     # Exponer el puerto de Django al host de Windows
+     ports:
+       - "8000:8000"
+     # Montar el código local para desarrollo
+     volumes:
+       - .:/usr/src/app
+     # Dependencia del servicio de base de datos
+     depends_on:
+       - srv_cvia_db
+     environment:
+       # Variables de entorno para la conexión a la base de datos
+       # Estas serán consumidas por settings.py
+       - DB_NAME=${DB_NAME} 
+       - DB_USER=${DB_USER} 
+       - DB_PASSWORD=${DB_PASSWORD} 
+       - DB_HOST=${DB_HOST} 
+       - DB_PORT=${DB_PORT}
+
+     # El comando de inicio será más interactivo para desarrollo
+     command: sh -c "python manage.py makemigrations && python manage.py migrate && python manage.py runserver 0.0.0.0:8000"
+
+   srv_cvia_db:
+     image: postgres:15-alpine
+     container_name: postgres-cvia_container_dev
+     restart: always
+     environment:
+       # Variables de entorno para configurar el contenedor PostgreSQL
+       POSTGRES_DB: ${POSTGRES_DB}
+       POSTGRES_USER: ${POSTGRES_USER}
+       POSTGRES_PASSWORD: ${POSTGRES_PASSWORD}
+     # Almacenamiento persistente para los datos de la BD
+     volumes:
+       - postgres_data_cvia:/var/lib/postgresql/data/
+     ports: 
+       - "5432:5432" # Exponer PostgreSQL al host
+    
+# Volúmenes que se usarán para persistencia
+volumes:
+  postgres_data_cvia:

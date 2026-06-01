@@ -1,0 +1,99 @@
+import requests
+
+class APIClient:
+    """Cliente para consumir la API REST"""
+
+    def __init__(self, base_url="http://127.0.0.1:8000/api/candidates/"):
+        self.base_url = base_url
+
+    def set_nombre_candidato(self, nombre):
+        """Establece el nombre del candidato"""
+        url = f"{self.base_url}set_nombre_candidato/"
+        data = {"nombre": nombre}
+        return requests.post(url, json=data).json()
+
+    def get_nombre_candidato(self):
+        """Obtiene el nombre del candidato"""
+        url = f"{self.base_url}get_nombre_candidato/"
+        return requests.get(url).json()
+
+    def procesa_documentos(self, ruta_directorio):
+        """Procesa documentos en un directorio"""
+        url = f"{self.base_url}procesa_documentos/"
+        data = {"ruta_directorio": ruta_directorio}
+        return requests.post(url, json=data).json()
+
+    def procesa_documento(self, ruta_directorio, archivo):
+        """Procesa un documento individual"""
+        url = f"{self.base_url}procesa_documento/"
+        data = {"ruta_directorio": ruta_directorio, "archivo": archivo}
+        return requests.post(url, json=data).json()
+
+    def mostrar_documentos(self):
+        """Muestra los documentos guardados"""
+        url = f"{self.base_url}mostrar_documentos/"
+        return requests.get(url).json()
+
+    def eliminar_documento(self, archivo):
+        """Elimina un documento específico"""
+        url = f"{self.base_url}eliminar_documento/"
+        data = {"archivo": archivo}
+        return requests.delete(url, json=data).json()
+
+    def generate_resumen_ejecutivo(self):
+        """Genera un resumen ejecutivo"""
+        url = f"{self.base_url}generate_resumen_ejecutivo/"
+        return requests.get(url).json()
+
+    def generate_cv_defecto(self):
+        """Genera un CV predeterminado"""
+        url = f"{self.base_url}generate_cv_defecto/"
+        return requests.get(url).json()
+
+    def generate_cv_requerimiento(self, req_laboral):
+        """Genera un CV basado en un requerimiento laboral"""
+        url = f"{self.base_url}generate_cv_requerimiento/"
+        data = {"req_laboral": req_laboral}
+        return requests.post(url, json=data).json()
+
+    def crear_directorio_local(self, nombre_directorio):
+        """Crea un directorio en almacenamiento local"""
+        url = f"{self.base_url}crear_directorio_local/"
+        data = {"nombre_directorio": nombre_directorio}
+        return requests.post(url, json=data).json()
+
+    def guarda_archivo_local(self, nombre_directorio, nombre_archivo):
+        """Guarda un archivo en almacenamiento local"""
+        url = f"{self.base_url}guarda_archivo_local/"
+        data = {"nombre_directorio": nombre_directorio, "nombre_archivo": nombre_archivo}
+        return requests.post(url, json=data).json()
+
+    def elimina_archivo_local(self, nombre_directorio, nombre_archivo):
+        """Elimina un archivo en almacenamiento local"""
+        url = f"{self.base_url}elimina_archivo_local/"
+        data = {"nombre_directorio": nombre_directorio, "nombre_archivo": nombre_archivo}
+        return requests.delete(url, json=data).json()
+
+    def eliminar_directorio_local(self, nombre_directorio):
+        """Elimina un directorio en almacenamiento local"""
+        url = f"{self.base_url}eliminar_directorio_local/"
+        data = {"nombre_directorio": nombre_directorio}
+        return requests.delete(url, json=data).json()
+
+
+# 🔹 Ejemplo de uso de la clase APIClient
+client = APIClient()
+
+print(client.set_nombre_candidato("Carlos Pérez"))
+print(client.get_nombre_candidato())
+print(client.procesa_documentos("ruta/a/documentos"))
+print(client.procesa_documento("ruta/a/documentos", "archivo.pdf"))
+print(client.mostrar_documentos())
+print(client.eliminar_documento("archivo.pdf"))
+print(client.generate_resumen_ejecutivo())
+print(client.generate_cv_defecto())
+print(client.generate_cv_requerimiento("Ingeniero en Software con experiencia en Python"))
+print(client.crear_directorio_local("mis_documentos"))
+print(client.guarda_archivo_local("mis_documentos", "cv.pdf"))
+print(client.elimina_archivo_local("mis_documentos", "cv.pdf"))
+print(client.eliminar_directorio_local("mis_documentos"))

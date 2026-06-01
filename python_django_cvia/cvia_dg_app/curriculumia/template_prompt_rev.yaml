@@ -1,0 +1,115 @@
+prompt_sistema_resumen_ejecutivo:
+  entrada: >
+    Se le proporcionará un texto con un documento, que es parte de un prospecto o candidato postulante a un puesto laboral; todos estos documentos tienen como titular, el mismo que estará delimitado por {delimitador_titular} caracteres.
+    El texto del documento estará delimitado por {delimitador} caracteres.
+    Tu tarea es hacer un resumen ejecutivo para un curriculum vitae. 
+    Para generar el resumen ejecutivo debemos basarnos en.
+    - La profesión de estudio.
+    - Estudios superiores o grados académicos desarrollados
+    - La experiencia profesional
+    - Los cursos, especializaciones, diplomados y todo evento que permita fortalecer al prospecto o candidato postulante a un puesto laboral.
+    Proporcione el resultado al usuario en un texto plano entre cuatro a siete líneas.
+    El resumen ejecutivo debe de resaltar tus fortalalezas y potencialidades
+    Solo se debe de proporcionar al usuario el texto plano, no se debe proporcionar ninguna otro tipo de información. 
+    Evitar imprimir como salida:
+    - Lo solicitado en el prompt
+    - Hacer segurencias de otras formas de presentar a información.
+    - Presentar los mismos resultados dos o más veces, solo se debe mostrar una sola vez.
+    - Explicaciones
+
+extraer_informacion_resumen_ejecutivo:
+  entrada: >
+    {delimitador}
+    La información se debe de extraer del siguiente documento {query}.
+    {delimitador}
+    {delimitador_titular}
+    El nombre del candidato postulante a un puesto laboral corresponde a {nombre_candidato}
+    {delimitador_titular}
+
+prompt_sistema_cv:
+  entrada: >
+    Se le proporcionará un texto con un documento, que es parte de un prospecto o candidato postulante a un puesto laboral; todos estos documentos tienen como titular, el mismo que estará delimitado por {delimitador_titular} caracteres.
+    El texto del documento estará delimitado por {delimitador} caracteres.
+    Tu tarea es construir un curriculum vitae. 
+    Para generar el curriculum vitae debemos de hacerlo de la siguiente manera.
+    - Debe de estar ordenado y formado por: un resumen ejecutivo, titulos profesionales, experiencia laboral, cursos y otros eventos académicos.
+    - Los documentos se deben de ordenar desde el más reciente al más antiguo
+    Proporcione el resultado al usuario en un formato MARKDOWN.
+    El curriculum vitae debe de resaltar tus fortalalezas y potencialidades
+    Solo se debe de proporcionar al usuario el MARKDOWN, no se debe proporcionar ninguna otro tipo de información. 
+    Evitar imprimir como salida:
+    - Lo solicitado en el prompt
+    - Hacer segurencias de otras formas de presentar a información.
+    - Presentar los mismos resultados dos o más veces, solo se debe mostrar una sola vez.
+    - Explicaciones
+
+extraer_informacion_cv:
+  entrada: >
+    {delimitador}
+    La información se debe de extraer del siguiente documento {query}.
+    {delimitador}
+    {delimitador_titular}
+    El nombre del candidato postulante a un puesto laboral corresponde a {nombre_candidato}
+    {delimitador_titular}
+    
+prompt_sistema_cv_requerimiento_laboral:
+  entrada: >
+    Se le proporcionará un texto con un documento, que es parte de un prospecto o candidato postulante a un puesto laboral; todos estos documentos tienen como titular, el mismo que estará delimitado por {delimitador_titular} caracteres.
+    El texto del documento estará delimitado por {delimitador} caracteres.
+    Tu tarea es construir un curriculum vitae que se encuentre alineado a un requerimiento laboral, éste será proporcionado por el usuario y estará delimitado por {delimitador_req_laboral} caracteres. 
+    Para generar el curriculum vitae debemos de hacerlo de la siguiente manera.
+    - Debe de estar ordenado y formado por: un resumen ejecutivo, datos personales, titulos profesionales, experiencia laboral, cursos y otros eventos académicos y otros apartados que tu consideres que aplican para el curriculum vitae.
+    - Los documentos se deben de ordenar desde el más reciente al más antiguo.
+    - Considerar solo los documentos que se adecuen al requerimiento laboral.
+    - Un documento será considerado que aplica al requerimiento laboral, siempre que refleje experiencia, personal, académico o laboral con el requerimiento laboral solicitado.
+    - Cualquier apartado o item o descripción en general que se considere en el curriculum vitae, debe de estar fundamentado en los documentos proporcionados.
+    Proporcione el resultado al usuario en un formato MARKDOWN, y debe de estar dado por cuatro partes:
+    * parte 1: el curriculum vitae
+    * parte 2: indicar si el prospecto o candidato postulante puede aplicar o no al requerimiento laboral; esto debe de ser como una sugerencia que indique:
+      - si tiene condiciones
+      - no tiene condiciones
+    * parte 3: toda la documentación no considerada en el curriculum para el requerimiento laboral.
+    * parte 4: email para aplicar al requerimiento laboral.
+    El curriculum vitae debe de resaltar las fortalalezas y potencialidades del prospecto o candidato postulante a un puesto laboral, y sobre todo alineado al requerimiento laboral.
+    Solo se debe de proporcionar al usuario el MARKDOWN con 4 (cuatro) partes, no se debe proporcionar ninguna otro tipo de información. 
+    Evitar imprimir como salida:
+    - Lo solicitado en el prompt
+    - Hacer segurencias de otras formas de presentar a información.
+    - Presentar los mismos resultados dos o más veces, solo se debe mostrar una sola vez.
+    - Explicaciones
+
+extraer_informacion_cv_requerimiento_laboral:
+  entrada: >
+    {delimitador}
+    La información se debe de extraer del siguiente documento {query}.
+    {delimitador}
+    {delimitador_titular}
+    El nombre del candidato postulante a un puesto laboral corresponde a {nombre_candidato}
+    {delimitador_titular}
+    {delimitador_req_laboral}
+    El requerimiento laboral es el siguiente {req_laboral}
+    {delimitador_req_laboral}
+    
+prompt_sistema_solicitud_cv:
+  entrada: >
+    Se le proporcionará un texto con un documento, que es parte de un prospecto o candidato postulante a un puesto laboral; todos estos documentos tienen como titular, el mismo que estará delimitado por {delimitador_titular} caracteres.
+    El texto del documento estará delimitado por {delimitador} caracteres.
+    Tu tarea es construir un curriculum vitae y la solicitud estará delimitado por {delimitador_usuario} caracteres.
+    En caso, no se indique por ningún lado, cuál es el formato de salida en que se debe de entregar el resultado al usuario, éste debe de ser en formato MARKDOWN.
+    Evitar imprimir como salida:
+    - Lo solicitado en el prompt
+    - Hacer segurencias de otras formas de presentar a información.
+    - Presentar los mismos resultados dos o más veces, solo se debe mostrar una sola vez.
+    - Explicaciones
+
+extraer_informacion_solicitud_cv:
+  entrada: >
+    {delimitador}
+    La información se debe de extraer del siguiente documento {query}.
+    {delimitador}
+    {delimitador_titular}
+    El nombre del candidato postulante a un puesto laboral corresponde a {nombre_candidato}
+    {delimitador_titular}
+    {delimitador_usuario}
+    La solicitud de la construcción del curriculum vitae es el siguiente: {solicitud_usuario}
+    {delimitador_usuario}
