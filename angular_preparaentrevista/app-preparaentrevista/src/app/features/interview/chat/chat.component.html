@@ -1,0 +1,131 @@
+<div class="container mt-3">
+  <div class="row g-0 w-100 justify-content-center">
+    <!-- 🔹 Panel izquierdo (histórico de sesiones) -->
+    <div class="col-md-4 col-12" *ngIf="mostrarHistorial">
+      <div class="border rounded shadow p-3 bg-white h-100">
+        <div class="d-flex justify-content-between align-items-center">
+          <h5>Histórico de sesiones</h5>
+          <button class="btn btn-sm btn-outline-secondary" (click)="toggleHistorial()">
+            <i class="bi bi-chevron-left"></i>
+          </button>
+        </div>
+        <div class="list-group overflow-auto" style="height:35rem;">
+          <button *ngFor="let sesion of sesiones" 
+                  class="list-group-item list-group-item-action"
+                  [class.active]="selectedSessionId === sesion.id"
+                  (dblclick)="cargarSesion(sesion)">
+            {{ sesion.session_name }}
+          </button>
+        </div>
+      </div>
+    </div>
+
+    <!-- 🔹 Panel derecho (chat principal) -->
+    <!--<div class="col-md-8 col-12 position-relative"> -->
+      <div [ngClass]="mostrarHistorial ? 'col-md-8 col-12 position-relative' : 'col-md-12 col-12 position-relative'">
+      <div class="border rounded shadow p-3 bg-white h-100">
+        <h4 class="mb-1 text-center">Entrevista</h4>
+
+        <!-- Botones -->
+        <div class="mb-3 d-flex flex-wrap gap-2">
+          <button class="btn btn-primary btn-sm" (click)="newInterview()">Nueva entrevista</button>
+          <button class="btn btn-info btn-sm" (click)="loadJobDescription()">Cargar Descripción del trabajo</button>
+          <!--<button class="btn btn-info btn-sm" data-bs-toggle="modal" data-bs-target="#resultModal" 
+                  (click)="openTipoEvaluacion('final')" 
+                  [disabled]="!puedeVerResultado">
+            Feedback
+          </button> -->
+          <!--<button class="btn btn-info btn-sm" data-bs-toggle="modal" data-bs-target="#resultModal" 
+                  (click)="openTipoEvaluacion('por_pregunta')" 
+                  [disabled]="!puedeVerResultado">
+            Ver evaluación por pregunta 
+          </button>-->
+
+          <button class="btn btn-outline-success btn-sm" data-bs-toggle="modal" data-bs-target="#resultModal" 
+                  (click)="openTipoEvaluacion('final')" 
+                  [disabled]="!puedeVerResultado">
+            Feedback
+          </button>
+
+          <button class="btn btn-outline-success btn-sm" data-bs-toggle="modal" data-bs-target="#resultModal" 
+                  (click)="openTipoEvaluacion('por_pregunta')" 
+                  [disabled]="!puedeVerResultado">
+            Ver evaluación por pregunta 
+          </button>
+
+        </div>
+
+        <!-- Ventana de mensajes -->
+        <div #chatWindow class="border p-3 mb-3 mx-auto col-12" style="height:25rem; overflow-y:auto;">
+          <div *ngFor="let msg of messages">
+            <!-- Pregunta -->
+            <div *ngIf="msg.role !== 'Respuesta'" class="text-start">
+              <span class="badge bg-secondary">{{ msg.role }}</span>
+              <div class="bg-light p-2 rounded mt-1">
+                <markdown [data]="msg.content"></markdown>
+              </div>
+            </div>
+
+            <!-- Respuesta -->
+            <div *ngIf="msg.role === 'Respuesta'" class="text-end">
+              <span class="badge bg-primary text-white">{{ msg.role }}</span>
+              <div class="bg-primary bg-opacity-25 p-2 rounded mt-1 text-start">
+                <markdown [data]="msg.content"></markdown>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Textarea con botón -->
+        <div class="input-group">
+          <textarea class="form-control" [(ngModel)]="answer" autosize [disabled]="puedeVerResultado|| bloqueado" 
+                    (keydown.enter)="sendAnswer($event)" [style.maxHeight.px]="240"></textarea>
+          <button class="btn btn-success rounded-circle d-flex align-items-center justify-content-center p-3 btn-lg" 
+                  [disabled]="puedeVerResultado|| bloqueado" (click)="sendAnswer()" type="button">
+            <i class="bi bi-chevron-left"></i>
+          </button>
+        </div>
+      </div>
+
+      <!-- 🔹 Botón flotante en borde izquierdo del chat -->
+      <button *ngIf="!mostrarHistorial" 
+              class="btn btn-sm btn-outline-secondary position-absolute top-50 start-0 translate-middle-y" 
+              (click)="toggleHistorial()">
+        <i class="bi bi-chevron-right"></i>
+      </button>
+    </div>
+  </div>
+</div>
+
+<!-- 🔹 Modal con ResultComponent -->
+<div class="modal fade" id="resultModal" tabindex="-1" aria-labelledby="resultModalLabel" aria-hidden="true"
+     data-bs-backdrop="static" data-bs-keyboard="false"
+     (hidden.bs.modal)="activaModalResultados = false">
+  <div class="modal-dialog modal-xl modal-dialog-scrollable">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="resultModalLabel">Resultado Final</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Cerrar"></button>
+      </div>
+      <div class="modal-body">
+        <app-result *ngIf="activaModalResultados"></app-result>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Botón -->
+<!--<button class="btn btn-info btn-sm" (click)="mostrarToast()">
+  Mostrar toast
+</button>-->
+
+<!-- Toast arriba y centrado -->
+<!--<div class="toast-container position-fixed start-50 translate-middle-x p-3 toast-top-custom">-->
+<div class="toast-container position-fixed top-0 start-50 translate-middle-x mt-5 p-3">
+  <div id="alertToast" class="toast bg-success text-white" role="alert" aria-live="assertive" aria-atomic="true">
+    <div class="toast-body">
+      Se ha finalizado con la evaluación. Puede revisar el Feedback y la Evaluación por preguntas.
+    </div>
+  </div>
+</div>
+

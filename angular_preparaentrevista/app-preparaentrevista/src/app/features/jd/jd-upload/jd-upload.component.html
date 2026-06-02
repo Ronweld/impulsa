@@ -1,0 +1,66 @@
+<div class="container mt-4">
+  <h3 class="mb-4">Cargar Descripción del trabajo</h3>
+
+  <!-- Campo para el título -->
+  <div class="row mb-3">
+    <div class="col-12 col-md-12">
+      <label class="form-label">Título Descripción del trabajo</label>
+      <input type="text" class="form-control" [(ngModel)]="title" maxlength="255" placeholder="Ingrese el título (máx. 255 caracteres)">
+    </div>
+  </div>
+
+  <!-- Selector de método -->
+  <div class="row mb-3">
+    <div class="col-12 col-md-6">
+      <label class="form-label">Selecciona el método de carga:</label>
+      <select class="form-select" [(ngModel)]="selectedMethod">
+        <option value="text">Texto manual</option>
+      <!--<option value="url">Desde URL</option> -->
+        <option value="pdf">Archivo PDF</option>
+      </select>
+    </div>
+  </div>
+
+  <!-- Opción 1: Texto manual -->
+  <div *ngIf="selectedMethod === 'text'" class="row mb-3">
+    <div class="col-12 col-md-12">
+      <label class="form-label">Descripción del trabajo</label>
+      <textarea class="form-control" [(ngModel)]="textContent" style="height:50vh"></textarea>
+    </div>
+  </div>
+
+  <!-- Opción 2: URL -->
+  <div *ngIf="selectedMethod === 'url'" class="row mb-3">
+    <div class="col-12 col-md-8">
+      <label class="form-label">URL</label>
+      <input type="url" class="form-control mb-2" [(ngModel)]="url">
+      <button class="btn btn-secondary mt-2" (click)="fetchFromUrl()">Extraer Job Description</button>
+      <!-- Mostrar texto extraído -->
+      <textarea *ngIf="textContent" class="form-control mt-2" [(ngModel)]="textContent" style="height:50vh"></textarea>
+    </div>
+  </div>
+
+  <!-- Opción 3: PDF -->
+  <div *ngIf="selectedMethod === 'pdf'" class="row mb-3">
+    <div class="col-12 col-md-8">
+      <label class="form-label">Archivo PDF</label>
+      <input type="file" class="form-control mb-2" (change)="onFileChange($event)" accept="application/pdf">
+      <!-- Vista previa PDF -->
+      <div *ngIf="pdfUrl" class="mt-2">
+        <embed [src]="pdfUrl" type="application/pdf" class="w-100" style="height:55vh" />
+      </div>
+    </div>
+  </div>
+
+  <!-- Botón de envío -->
+  <div class="row">
+    <div class="col-auto">
+      <!--<button class="btn btn-primary btn-sm" (click)="uploadJobDescription()">-->
+      <button class="btn btn-primary btn-sm" (click)="uploadJobDescription()" [disabled]="isLoading">
+          <span *ngIf="isLoading" class="spinner-border spinner-border-sm me-2" role="status" aria-hidden="true"></span>
+          {{ isLoading ? 'Procesando...' : 'Guardar Job Description' }}
+      </button>
+
+    </div>
+  </div>
+</div>

@@ -1,0 +1,28 @@
+<div class="container mt-4 d-flex flex-column" style="height: 96vh;" *ngIf="result">
+  <!-- 🔹 Cabecera fija -->
+  <div class="flex-shrink-0">
+    <h3>Resultado Final</h3>
+  </div>
+
+  <!-- 🔹 Parte central desplazable -->
+  <div class="flex-grow-1 overflow-auto my-3">
+    <div class="card p-3" >
+      <div *ngIf="tipo_evaluacion == 'final'">
+        <h2><strong>Calificación porcentual final</strong></h2>
+        <p><strong>Technical:</strong> {{ result.technical | number:'1.0-2' }}</p>
+        <p><strong>Communication:</strong> {{ result.communication | number:'1.0-2'}}</p>
+        <p><strong>Cultural:</strong> {{ result.cultural | number:'1.0-2'}}</p>
+      </div>
+      <hr>
+      <!-- Renderiza como Markdown -->
+      <markdown [data]="resultMarkdown"></markdown>
+    </div>
+  </div>
+
+  <!-- 🔹 Pie fijo -->
+  <div class="flex-shrink-0 mt-3">
+    <!--<button class="btn btn-primary" (click)="goBackToChat()">Volver al Chat</button>-->
+    <button class="btn btn-primary" data-bs-dismiss="modal">Volver al Chat</button>
+
+  </div>
+</div>
